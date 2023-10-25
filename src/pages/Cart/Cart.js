@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
   const mock = [
@@ -21,6 +22,7 @@ const Cart = () => {
       count: 1,
     },
   ];
+  const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([...mock]);
   const [selected, setSelected] = useState([]);
 
@@ -34,57 +36,72 @@ const Cart = () => {
   const handleAllCheck = checked => {
     if (checked) {
       const idArr = [];
-      mock.forEach(ele => idArr.push(ele.id));
+      cartItems.forEach(ele => idArr.push(ele.id));
       setSelected(idArr);
     } else setSelected([]);
   };
-  const handleDelete = (e, itemId) => {
-    e.preventDefault();
+
+  const handleDelete = itemId => {
     setCartItems(cartItems.filter(ele => ele.id !== itemId));
   };
+  const handleCheckedDelete = selected => {
+    let tmp = [];
+    selected.forEach(item => (tmp = cartItems.filter(ele => ele.id !== item)));
+    selected.forEach(item => (tmp = tmp.filter(ele => ele.id !== item)));
+    setCartItems(tmp);
+  };
+
   return (
     <div>
-      {cartItems.map(item => {
-        return (
-          // <div>
-          <tr key={item.id}>
+      <table>
+        <tbody>
+          {cartItems.map(item => {
+            return (
+              <tr key={item.id}>
+                <td>
+                  <input
+                    type="checkbox"
+                    onChange={e => handleCheck(e.target.checked, item.id)}
+                    checked={selected.includes(item.id) ? true : false}
+                  />
+                </td>
+                <td>{item.id}</td>
+                <td>{item.name}</td>
+                <td>{item.price}</td>
+                <td>
+                  <button>-</button>
+                  {item.count}
+                  <button>+</button>
+                </td>
+                <td>
+                  <button onClick={() => handleDelete(item.id)}>X</button>
+                </td>
+              </tr>
+            );
+          })}
+          <tr>
             <td>
               <input
                 type="checkbox"
-                onChange={e => handleCheck(e.target.checked, item.id)}
-                checked={selected.includes(item.id) ? true : false}
+                onChange={e => handleAllCheck(e.target.checked)}
+                checked={selected.length === mock.length ? true : false}
               />
             </td>
-            <td>{item.id}</td>
-            <td>{item.name}</td>
-            <td>{item.price}</td>
-            <td>{item.count}</td>
+            <td />
+            <td>{cartItems.reduce((acc, v) => acc + v.price * v.count, 0)}</td>
             <td>
-              <button>+</button>
-              <button>-</button>
-            </td>
-            <td>
-              <button onClick={e => handleDelete(e, item.id)}>X</button>
+              <button onClick={() => handleCheckedDelete(selected)}>X</button>
             </td>
           </tr>
-          // </div>
-        );
-      })}
-      <tr>
-        <td>
-          <input
-            type="checkbox"
-            onChange={e => handleAllCheck(e.target.checked)}
-            checked={selected.length === mock.length ? true : false}
-          />
-        </td>
-        <td />
-        <td>{cartItems.reduce((acc, v) => acc + v.price * v.count, 0)}</td>
-        <td>
-          <button>X</button>
-        </td>
-      </tr>
-      <button>결제하기</button>
+        </tbody>
+      </table>
+      <button
+        onClick={() => {
+          if (cartItems.length) navigate('/pay');
+        }}
+      >
+        결제하기
+      </button>
     </div>
   );
 };

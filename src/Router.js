@@ -3,14 +3,16 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Nav from './components/Nav/Nav';
 import Cart from './pages/Cart/Cart';
 import Login from './pages/Login/Login';
+import Pay from './pages/Pay/Pay';
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Nav />
       <Routes>
-        <Route path="login" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/pay" element={<Pay />} />
       </Routes>
     </BrowserRouter>
   );
