@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  // align-items: flex-start;
+  justify-content: space-between;
+  background-color: rgb(249, 249, 246);
+  height: 200 px;
+}
+
+ul {
+  font-size: 23px;
+  color: black;
+  display: flex;
+  flex-direction: row;
+}
+
+.headerleft {
+  // display: flex;
+  // justify-content: space-between;
+  gap: 50px;
+  margin: 25px auto;
+}
+
+.headerright {
+  // display: flex;
+  // justify-content: space-between;
+  gap: 60px;
+  margin: 25px auto;
+}
