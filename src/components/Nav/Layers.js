@@ -2,8 +2,6 @@ import React from 'react';
 import './Layers.scss';
 
 const Header = () => {
-  
-  
   return (
     <div className="container">
       <ul className="headerleft">
