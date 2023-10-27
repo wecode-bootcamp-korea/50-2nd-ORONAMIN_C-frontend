@@ -1,30 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Cart.scss';
 
 const Cart = () => {
-  const mock = [
-    {
-      id: 1,
-      name: '사과',
-      price: 1003,
-      count: 2,
-    },
-    {
-      id: 2,
-      name: '바나나',
-      price: 3004,
-      count: 1,
-    },
-    {
-      id: 3,
-      name: '수박',
-      price: 2005,
-      count: 1,
-    },
-  ];
   const navigate = useNavigate();
-  const [cartItems, setCartItems] = useState([...mock]);
+  const [cartItems, setCartItems] = useState([]);
   const [selected, setSelected] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/data/data.json')
+      .then(res => res.json())
+      .then(data => setCartItems(data));
+  }, []);
 
   const handleCheck = (checked, id) => {
     if (checked) {
@@ -33,17 +20,42 @@ const Cart = () => {
       setSelected(selected.filter(ele => ele !== id));
     }
   };
-  const handleAllCheck = checked => {
-    if (checked) {
+
+  const handleAllCheck = () => {
+    if (isAllChecked) {
       const idArr = [];
       cartItems.forEach(ele => idArr.push(ele.id));
       setSelected(idArr);
     } else setSelected([]);
   };
 
+  const handleMinus = id => {
+    const tmp = cartItems.filter(item => item.id === id)[0];
+    if (tmp.count <= 1) return;
+    else tmp.count--;
+    const next = [];
+    cartItems.map(item => {
+      if (item.id === tmp.id) next.push(tmp);
+      else next.push(item);
+    });
+    setCartItems([...next]);
+  };
+
+  const handlePlus = id => {
+    const tmp = cartItems.filter(item => item.id === id)[0];
+    tmp.count++;
+    const next = [];
+    cartItems.map(item => {
+      if (item.id === tmp.id) next.push(tmp);
+      else next.push(item);
+    });
+    setCartItems([...next]);
+  };
+
   const handleDelete = itemId => {
     setCartItems(cartItems.filter(ele => ele.id !== itemId));
   };
+
   const handleCheckedDelete = selected => {
     let tmp = [];
     selected.forEach(item => (tmp = cartItems.filter(ele => ele.id !== item)));
@@ -51,57 +63,76 @@ const Cart = () => {
     setCartItems(tmp);
   };
 
+  const isAllChecked =
+    selected.length === cartItems.length && selected.length !== 0;
+
   return (
-    <div>
-      <table>
+    <div id="Cart">
+      <table id="rwd-table-large">
+        <thead>
+          <tr>
+            <th />
+            <th id="item">물품명</th>
+            <th id="price">가격</th>
+            <th id="count">수량</th>
+            <th />
+          </tr>
+        </thead>
         <tbody>
           {cartItems.map(item => {
             return (
               <tr key={item.id}>
-                <td>
+                <td id="checkbox">
                   <input
                     type="checkbox"
                     onChange={e => handleCheck(e.target.checked, item.id)}
-                    checked={selected.includes(item.id) ? true : false}
+                    checked={selected.includes(item.id)}
                   />
                 </td>
-                <td>{item.id}</td>
                 <td>{item.name}</td>
                 <td>{item.price}</td>
                 <td>
-                  <button>-</button>
-                  {item.count}
-                  <button>+</button>
+                  <div>
+                    <button onClick={() => handleMinus(item.id)}>-</button>
+                    <span>{item.count}</span>
+                    <button onClick={() => handlePlus(item.id)}>+</button>
+                  </div>
                 </td>
-                <td>
+                <td id="deletebox">
                   <button onClick={() => handleDelete(item.id)}>X</button>
                 </td>
               </tr>
             );
           })}
           <tr>
-            <td>
+            <td id="checkbox">
               <input
                 type="checkbox"
                 onChange={e => handleAllCheck(e.target.checked)}
-                checked={selected.length === mock.length ? true : false}
+                checked={isAllChecked}
               />
             </td>
             <td />
-            <td>{cartItems.reduce((acc, v) => acc + v.price * v.count, 0)}</td>
             <td>
+              <p>{cartItems.reduce((acc, v) => acc + v.price * v.count, 0)}</p>
+            </td>
+            <td />
+            <td id="deletebox">
               <button onClick={() => handleCheckedDelete(selected)}>X</button>
             </td>
           </tr>
         </tbody>
       </table>
-      <button
-        onClick={() => {
-          if (cartItems.length) navigate('/pay');
-        }}
-      >
-        결제하기
-      </button>
+      <div>
+        <button
+          id="payBtn"
+          onClick={() => {
+            if (cartItems.length) navigate('/pay');
+          }}
+        >
+          <p>결제하기</p>
+        </button>
+      </div>
     </div>
   );
 };

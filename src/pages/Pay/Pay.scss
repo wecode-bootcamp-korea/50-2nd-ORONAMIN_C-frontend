@@ -1,0 +1,45 @@
+#Pay {
+  background-color: #fffef2;
+  min-height: 40rem;
+  border: 1px solid black;
+  padding: 15px;
+}
+
+#userDB {
+  margin: 20px;
+  border: 1px solid black;
+}
+
+#addressBox {
+  margin: 20px;
+  border: 1px solid black;
+  gap: 10px;
+  #address {
+    margin: 10px 0 10px 0;
+    width: 50%;
+    height: 30px;
+  }
+}
+
+#cartDB {
+  margin: 20px;
+  border: 1px solid black;
+}
+
+#orderBtn {
+  width: 20em;
+  height: 5em;
+  float: right;
+  margin-right: 10%;
+  border-radius: 5px;
+  background-color: #2d71f7;
+  opacity: 0.8;
+  &:hover {
+    opacity: 1;
+    transition: 0.7s;
+  }
+
+  p {
+    font-size: large;
+  }
+}
