@@ -14,12 +14,12 @@
 //   }
 // }
 
-.cart-button-container {
+.cartButtonContainer {
   position: relative;
   display: inline-block;
 }
 
-.cart-button-container button {
+.cartButtonContainer button {
   display: none;
   background-color: #007bff;
   color: #fff;
@@ -29,6 +29,6 @@
   cursor: pointer;
 }
 
-.cart-button-container:hover button {
+.cartButtonContainer:hover button {
   display: block;
 }

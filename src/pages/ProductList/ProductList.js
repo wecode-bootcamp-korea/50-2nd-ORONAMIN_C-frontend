@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import CartBtnComponent from '../../components/CartBtn/CartBtn';
-import SubCategoryComponent from '../../components/SubCategory/SubCategory';
-import MainCategoryComponent from '../../components/MainCategory/MainCategory';
-import { useNavigate } from 'react-router-dom';
+import CategoryComponent from '../../components/Category/Category';
+import { useNavigate, useParams } from 'react-router-dom';
 import './ProductList.scss';
 
 const ProductList = () => {
   const navigate = useNavigate();
+  const params = useParams();
+  console.log(useParams);
   const [productGrid, setProductGrid] = useState([]);
   const [subCategory, setSubCategory] = useState('');
   const [subDescriptionBody, setSubDescriptionBody] = useState('');
 
   const goToProductDetail = () => {
-    navigate('/ProductDetail');
+    navigate(`/ProductDetail/${params.product_id}`); //scent_id 와 brand_id(서브카테고리)로 구분하여 페이지 이동하기
   };
 
   useEffect(() => {
@@ -24,52 +25,51 @@ const ProductList = () => {
     })
       .then(response => response.json())
       .then(result => setProductGrid(result.data));
-  }, [subCategory]);
+  }, [params.product_id]);
 
   return (
-    <div>
-      <div className="contaner">
-        <MainCategoryComponent />
-        <SubCategoryComponent />
-        <div className="contanerDetail">
-          <div className="subInfo">
-            <div
-              className="subCategory"
-              onChange={e => setSubCategory(e.target.value)}
-              value={subCategory}
-            />
-            <div
-              className="subDescriptionBody"
-              onChange={e => setSubDescriptionBody(e.target.value)}
-              value={subDescriptionBody}
-            />
-          </div>
-          <div className="productList">
-            {MOK.map(data => (
-              <li key={data.id} className="productGrid">
-                <img
-                  className="itemImg"
-                  src={data.itemImg}
-                  alt="itemImg"
-                  onClick={goToProductDetail}
-                />
-                <div className="itemInfo">
-                  <div className="info1">
-                    <h5 className="itemName">{data.itemName}</h5>
-                    <p className="itemDescription">{data.itemDescription}</p>
-                  </div>
-                  <div className="info2">
-                    <div className="capacity">{data.Capacity}</div>
-                    <div className="price">{data.Price}</div>
-                  </div>
+    <>
+      <CategoryComponent />
+      <div className="contanerDetail">
+        <div className="subInfo">
+          <div
+            className="subCategory"
+            onChange={e => setSubCategory(e.target.value)}
+            value={subCategory}
+          />
+          <div
+            className="subDescriptionBody"
+            onChange={e => setSubDescriptionBody(e.target.value)}
+            value={subDescriptionBody}
+          />
+        </div>
+        <div className="productList">
+          {MOK.map(data => (
+            <li
+              key={data.product_id}
+              className="productGrid"
+              onClick={goToProductDetail}
+            >
+              <img
+                className="productImg"
+                src={data.image_source}
+                alt="productImg"
+              />
+              <div className="itemInfo">
+                <div className="info1">
+                  <h5 className="itemName">{data.product_name}</h5>
+                  <p className="itemDescription">{data.description}</p>
                 </div>
-                <CartBtnComponent />
-              </li>
-            ))}
-          </div>
+                <div className="info2">
+                  <div className="price">{data.price}원</div>
+                </div>
+              </div>
+              <CartBtnComponent />
+            </li>
+          ))}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -79,58 +79,100 @@ export default ProductList;
 const MOK = [
   {
     id: 1,
-    itemImg:
-      'https://velog.velcdn.com/images/rayong/post/30a5de22-fd54-46bc-b540-e906c2c4bf48/image.jpg',
-    itemName: '우라논 오 드 퍼퓸',
-    itemDescription: '변함없이 우뚝 서 있는 모노리스에서 영감을 받아 탄생',
-    Capacity: '50ml',
-    Price: 210000,
+    product_name: '라임 바질 앤 만다린',
+    price: 220000,
+    description:
+      '조 말론 런던의 시그니처 향. 카리브해의 산들바람에서 실려온 듯한 라임향에 톡 쏘는 바질과 향기로운 백리향이 더해져 독특한 조합을 만들어 냅니다. 현대적인 감각의 클래식한 향입니다.',
+    brand_id: 1,
+    scent_id: 3,
+    stock: null,
+    name: '시트러스',
+    scent_desc:
+      '시트러스 향은 산뜻하고 풍미가 넘치며, 활력과 에너지를 부여해 줍니다.',
+    brand_name: '조말론',
+    image_source: '파란색',
+    product_id: 1,
   },
   {
     id: 2,
-    itemImg:
-      'https://velog.velcdn.com/images/rayong/post/30a5de22-fd54-46bc-b540-e906c2c4bf48/image.jpg',
-    itemName: '우라논 오 드 퍼퓸',
-    itemDescription: '변함없이 우뚝 서 있는 모노리스에서 영감을 받아 탄생',
-    Capacity: '50ml',
-    Price: 210000,
+    product_name: '라임 바질 앤 만다린',
+    price: 220000,
+    description:
+      '조 말론 런던의 시그니처 향. 카리브해의 산들바람에서 실려온 듯한 라임향에 톡 쏘는 바질과 향기로운 백리향이 더해져 독특한 조합을 만들어 냅니다. 현대적인 감각의 클래식한 향입니다.',
+    brand_id: 1,
+    scent_id: 3,
+    stock: null,
+    name: '시트러스',
+    scent_desc:
+      '시트러스 향은 산뜻하고 풍미가 넘치며, 활력과 에너지를 부여해 줍니다.',
+    brand_name: '조말론',
+    image_source: '파란색',
+    product_id: 1,
   },
   {
     id: 3,
-    itemImg:
-      'https://velog.velcdn.com/images/rayong/post/30a5de22-fd54-46bc-b540-e906c2c4bf48/image.jpg',
-    itemName: '우라논 오 드 퍼퓸',
-    itemDescription: '변함없이 우뚝 서 있는 모노리스에서 영감을 받아 탄생',
-    Capacity: '50ml',
-    Price: 210000,
+    product_name: '라임 바질 앤 만다린',
+    price: 200000,
+    description:
+      '조 말론 런던의 시그니처 향. 카리브해의 산들바람에서 실려온 듯한 라임향에 톡 쏘는 바질과 향기로운 백리향이 더해져 독특한 조합을 만들어 냅니다. 현대적인 감각의 클래식한 향입니다.',
+    brand_id: 1,
+    scent_id: 3,
+    stock: null,
+    name: '시트러스',
+    scent_desc:
+      '시트러스 향은 산뜻하고 풍미가 넘치며, 활력과 에너지를 부여해 줍니다.',
+    brand_name: '조말론',
+    image_source: '파란색',
+    product_id: 1,
   },
   {
     id: 4,
-    itemImg:
-      'https://velog.velcdn.com/images/rayong/post/30a5de22-fd54-46bc-b540-e906c2c4bf48/image.jpg',
-    itemName: '우라논 오 드 퍼퓸',
-    itemDescription: '변함없이 우뚝 서 있는 모노리스에서 영감을 받아 탄생',
-    Capacity: '50ml',
-    Price: 210000,
+    product_name: '라임 바질 앤 만다린',
+    price: 220000,
+    description:
+      '조 말론 런던의 시그니처 향. 카리브해의 산들바람에서 실려온 듯한 라임향에 톡 쏘는 바질과 향기로운 백리향이 더해져 독특한 조합을 만들어 냅니다. 현대적인 감각의 클래식한 향입니다.',
+    brand_id: 1,
+    scent_id: 3,
+    stock: null,
+    name: '시트러스',
+    scent_desc:
+      '시트러스 향은 산뜻하고 풍미가 넘치며, 활력과 에너지를 부여해 줍니다.',
+    brand_name: '조말론',
+    image_source: '파란색',
+    product_id: 1,
   },
-  // {
-  //   id: 5,
-  //   itemImg:
-  //     'https://velog.velcdn.com/images/rayong/post/30a5de22-fd54-46bc-b540-e906c2c4bf48/image.jpg',
-  //   itemName: '우라논 오 드 퍼퓸',
-  //   itemDescription: '변함없이 우뚝 서 있는 모노리스에서 영감을 받아 탄생',
-  //   Capacity: '50ml',
-  //   Price: 210000,
-  // },
-  // {
-  //   id: 6,
-  //   itemImg:
-  //     'https://velog.velcdn.com/images/rayong/post/30a5de22-fd54-46bc-b540-e906c2c4bf48/image.jpg',
-  //   itemName: '우라논 오 드 퍼퓸',
-  //   itemDescription: '변함없이 우뚝 서 있는 모노리스에서 영감을 받아 탄생',
-  //   Capacity: '50ml',
-  //   Price: 210000,
-  // },
+  {
+    id: 5,
+    product_name: '라임 바질 앤 만다린',
+    price: 220000,
+    description:
+      '조 말론 런던의 시그니처 향. 카리브해의 산들바람에서 실려온 듯한 라임향에 톡 쏘는 바질과 향기로운 백리향이 더해져 독특한 조합을 만들어 냅니다. 현대적인 감각의 클래식한 향입니다.',
+    brand_id: 1,
+    scent_id: 3,
+    stock: null,
+    name: '시트러스',
+    scent_desc:
+      '시트러스 향은 산뜻하고 풍미가 넘치며, 활력과 에너지를 부여해 줍니다.',
+    brand_name: '조말론',
+    image_source: '파란색',
+    product_id: 1,
+  },
+  {
+    id: 6,
+    product_name: '라임 바질 앤 만다린',
+    price: 220000,
+    description:
+      '조 말론 런던의 시그니처 향. 카리브해의 산들바람에서 실려온 듯한 라임향에 톡 쏘는 바질과 향기로운 백리향이 더해져 독특한 조합을 만들어 냅니다. 현대적인 감각의 클래식한 향입니다.',
+    brand_id: 1,
+    scent_id: 3,
+    stock: null,
+    name: '시트러스',
+    scent_desc:
+      '시트러스 향은 산뜻하고 풍미가 넘치며, 활력과 에너지를 부여해 줍니다.',
+    brand_name: '조말론',
+    image_source: '파란색',
+    product_id: 1,
+  },
 ];
 
 //{

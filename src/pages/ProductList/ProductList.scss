@@ -1,71 +1,72 @@
-.contaner {
+.contanerDetail {
   display: flex;
-  flex-direction: column;
-  .contanerDetail {
-    display: flex;
 
-    .subInfo {
+  .subInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .subDescriptionBody {
+      border: 1px solid purple;
+      padding: 80px 40px;
+      flex-basis: auto;
+      width: 33.33333%;
+      height: 700px;
+    }
+  }
+  .productList {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    background-color: #fffef2;
+
+    .productGrid {
+      border: 1px solid red;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      .subDescriptionBody {
-        border: 1px solid purple;
-        padding: 80px 40px;
-        flex-basis: auto;
-        width: 33.33333%;
-        height: 700px;
-      }
-    }
-    .productList {
-      display: flex;
-      flex-direction: row;
       align-items: center;
-      .productGrid {
-        border: 1px solid red;
+      text-align: center;
+      width: auto;
+      height: auto;
+      &:hover {
+        background-color: beige;
+      }
+
+      .itemImg {
+        width: 100%;
+        height: 100%;
+        padding: 40px 40px 40px;
+      }
+
+      .itemInfo {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        text-align: center;
-        width: auto;
-        height: auto;
+        padding: 30px 40px;
 
-        .itemImg {
+        .info1 {
           width: 100%;
           height: 100%;
-          padding: 40px 40px 40px;
-        }
-        .itemInfo {
-          display: flex;
-          flex-direction: column;
-          padding: 30px 40px;
-          .info1 {
-            width: 100%;
-            height: 100%;
-            .itemName {
-              color: #252525;
-              font-size: 14px;
-              font-weight: 700;
-              margin-bottom: 15px;
-            }
-            .itemDescription {
-              padding: 3px 0px 0px;
-              font-size: 14px;
-              color: #666;
-            }
+
+          .itemName {
+            color: #252525;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 15px;
           }
-          .info2 {
-            .capacity {
-              margin-top: 20px;
-              color: #333333;
-              font-size: 14px;
-              font-weight: 400;
-            }
-            .price {
-              margin-top: 15px;
-              color: #333333;
-              font-size: 14px;
-              font-weight: 400;
-            }
+
+          .itemDescription {
+            padding: 3px 0px 0px;
+            font-size: 14px;
+            color: #666;
+          }
+        }
+
+        .info2 {
+          .price {
+            margin-top: 15px;
+            color: #333333;
+            font-size: 14px;
+            font-weight: 400;
           }
         }
       }
