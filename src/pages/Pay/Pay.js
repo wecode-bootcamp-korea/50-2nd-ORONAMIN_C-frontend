@@ -1,23 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Pay.scss';
 
 const Pay = () => {
-  const [user, setUser] = useState({
-    nickname: 'boo',
-    address: 'abc abcd abcde',
-    phone: '010-111-1234',
-    point: 10000,
-  });
+  const [user, setUser] = useState({});
   const navigate = useNavigate();
   const [address, setAddress] = useState('');
   const [checked, setChecked] = useState(false);
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/data/user.json')
+      .then(res => res.json())
+      .then(data => setUser(data[0]));
+  }, []);
+  useEffect(() => {
+    fetch('http://localhost:3000/data/data.json')
+      .then(res => res.json())
+      .then(data => setCart(data));
+  }, []);
 
   const handleCheck = () => {
     setChecked(!checked);
     if (!checked) setAddress(user.address);
     else setAddress('');
   };
+
   return (
     <div id="Pay">
       <div id="userDB">
@@ -40,9 +48,21 @@ const Pay = () => {
       </div>
       <div id="cartDB">
         <p>현재 포인트 : {user.point}</p>
-        <p>이거 : 얼마</p>
-        <p>저거 : 얼마</p>
-        <p>그거 : 얼마</p>
+        <div id="row header">
+          <div id="cell">물품명</div>
+          <div id="cell">가격</div>
+          <div id="cell">수량</div>
+        </div>
+        {cart.map(item => {
+          return (
+            <div key={item.id} id="row">
+              <div id="cell">{item.name}</div>
+              <div id="cell">{item.price}</div>
+              <div id="cell">{item.count}</div>
+            </div>
+          );
+        })}
+        <div>총액 : {cart.reduce((acc, v) => acc + v.price * v.count, 0)}</div>
       </div>
       <div>
         <button

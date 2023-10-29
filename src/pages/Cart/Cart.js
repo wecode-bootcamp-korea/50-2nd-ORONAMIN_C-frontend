@@ -66,6 +66,18 @@ const Cart = () => {
   const isAllChecked =
     selected.length === cartItems.length && selected.length !== 0;
 
+  // const handleClick = () => {
+  //   fetch('', {
+  //     method: 'POST',
+  //     headers: {
+  //       a: 'a',
+  //     },
+  //     body: JSON.stringify({
+  //       cart: cartItems,
+  //     }),
+  //   });
+  // };
+
   return (
     <div id="Cart">
       <table id="rwd-table-large">
@@ -94,7 +106,7 @@ const Cart = () => {
                 <td>
                   <div>
                     <button onClick={() => handleMinus(item.id)}>-</button>
-                    <span>{item.count}</span>
+                    <span id="countbox">{item.count}</span>
                     <button onClick={() => handlePlus(item.id)}>+</button>
                   </div>
                 </td>

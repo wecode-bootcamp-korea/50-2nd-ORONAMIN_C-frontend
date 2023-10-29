@@ -33,7 +33,7 @@ main {
 table {
   border-collapse: collapse;
   display: block;
-  width: 90%;
+  width: 100%;
   // float: left;
   margin: 2em;
   // table-layout: fixed;
@@ -58,7 +58,6 @@ table {
         text-align: center;
         span {
           min-width: 100px;
-          table-layout: fixed;
           padding: 3px;
         }
       }
@@ -78,7 +77,7 @@ table {
 
 @media screen and (min-width: $large-up) {
   table {
-    width: 90%;
+    width: 100%;
 
     thead {
       border-bottom: 3px solid $primary-color;
@@ -91,7 +90,7 @@ table {
         border-bottom: 1px solid #ddd;
         td {
           span {
-            min-width: 70px;
+            min-width: 100px;
             padding: 3px;
           }
         }
@@ -142,7 +141,7 @@ table {
         font-size: 1.125em;
       }
       span {
-        min-width: 70px;
+        min-width: 100px;
         padding: 3px;
       }
     }
@@ -185,7 +184,7 @@ table {
         padding: 0 !important;
       }
       span {
-        min-width: 70px;
+        min-width: 100px;
         padding: 3px;
       }
     }
@@ -259,6 +258,10 @@ table {
 
 #checkbox {
   width: 5%;
+}
+
+#countbox {
+  width: 100px;
 }
 
 #item {
