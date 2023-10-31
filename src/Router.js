@@ -8,7 +8,10 @@ const Router = () => {
     <BrowserRouter>
       {/* <Nav /> */}
       <Routes>
-        <Route path="/" element={<ProductDetail />} />
+        <Route
+          path="/product-list/detail/:producId"
+          element={<ProductDetail />}
+        />
       </Routes>
     </BrowserRouter>
   );
