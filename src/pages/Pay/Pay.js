@@ -8,14 +8,29 @@ const Pay = () => {
   const [address, setAddress] = useState('');
   const [checked, setChecked] = useState(false);
   const [cart, setCart] = useState([]);
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
-    fetch('http://localhost:3000/data/user.json')
+    // fetch('/data/user.json');
+    fetch('http://10.58.52.218:8000/users/info', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: `Bearer ${token}`,
+      },
+    })
       .then(res => res.json())
-      .then(data => setUser(data[0]));
+      .then(data => setUser(data));
   }, []);
   useEffect(() => {
-    fetch('http://localhost:3000/data/data.json')
+    // fetch('/data/data.json')
+    fetch('http://10.58.52.83:8000/users/order', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: `Bearer ${token}`,
+      },
+    })
       .then(res => res.json())
       .then(data => setCart(data));
   }, []);
@@ -24,6 +39,11 @@ const Pay = () => {
     setChecked(!checked);
     if (!checked) setAddress(user.address);
     else setAddress('');
+  };
+
+  const handlePay = () => {
+    alert('hello!');
+    navigate('/cart');
   };
 
   return (
@@ -55,23 +75,17 @@ const Pay = () => {
         </div>
         {cart.map(item => {
           return (
-            <div key={item.id} id="row">
-              <div id="cell">{item.name}</div>
-              <div id="cell">{item.price}</div>
-              <div id="cell">{item.count}</div>
+            <div key={item.product_id} id="row">
+              <div id="cell">{item.product_name}</div>
+              <div id="cell">{item.product_price}</div>
+              <div id="cell">{item.basket_quantity}</div>
             </div>
           );
         })}
         <div>총액 : {cart.reduce((acc, v) => acc + v.price * v.count, 0)}</div>
       </div>
       <div>
-        <button
-          id="orderBtn"
-          onClick={() => {
-            alert('hello!');
-            navigate('/cart');
-          }}
-        >
+        <button id="orderBtn" onClick={handlePay}>
           <p>결제하기</p>
         </button>
       </div>
