@@ -1,0 +1,73 @@
+.red {
+  background-color: red;
+}
+.blue {
+  background-color: blue;
+}
+.Login {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 700px;
+  padding: 0 20px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background-color: #dadada;
+  display: flex;
+  flex-direction: column;
+}
+.titleWrap {
+  margin-top: 130px;
+  padding-left: 45%;
+  font-size: 27px;
+  font-weight: 400;
+}
+hr {
+  margin-top: 40px;
+  width: 66%;
+}
+.content {
+  // flex: 1;
+  margin-top: 26px;
+}
+.inputWrap {
+  display: flex;
+  border-radius: 4px;
+  padding: 16px;
+  margin-top: 8px;
+  background-color: white;
+  border: 1px solid #e2e0e0;
+  width: 57%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+.input {
+  width: 100%;
+  outline: none;
+  border: none;
+  height: 17px;
+  font-size: 15px;
+  font-weight: 400;
+}
+.inputTitle {
+  margin-left: 135px;
+  margin-bottom: 10px;
+}
+.input::placeholder {
+  color: #dadada;
+}
+.btn {
+  width: 62%;
+  height: 48px;
+  margin-left: 133px;
+  margin-top: 20px;
+  border-radius: 4px;
+  background-color: #000000;
+  color: #dadada;
+}
+.go {
+  font-weight: 400;
+  font-size: small;
+  text-align: center;
+}
