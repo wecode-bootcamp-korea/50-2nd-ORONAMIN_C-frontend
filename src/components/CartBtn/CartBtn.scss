@@ -1,34 +1,14 @@
-// .cartButton {
-//   border-color: #333;
-//   //   background-color: #333;
-//   color: #f6f5e8;
-//   width: 100%;
-//   //   padding: 22px 24px;
-//   cursor: pointer;
-//   .cartBtn:hover {
-//     opacity: 0;
-//     display: block;
-//   }
-//   .carBtn {
-//     display: none;
-//   }
-// }
-
 .cartButtonContainer {
   position: relative;
   display: inline-block;
-}
-
-.cartButtonContainer button {
-  display: none;
-  background-color: #007bff;
-  color: #fff;
   padding: 5px 10px;
-  border: none;
-  border-radius: 4px;
   cursor: pointer;
-}
 
-.cartButtonContainer:hover button {
-  display: block;
+  .btn {
+    background-color: black;
+    color: #fff;
+    font-size: 1.4rem;
+    border: none;
+    border-radius: 4px;
+  }
 }

@@ -1,35 +1,70 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Category.scss';
 
+const SCENT = 'scent';
+const BRAND = 'brand';
+
 const Category = () => {
-  const [subCategory, setSubCategory] = useState([]);
+  const [subScentCategory, setSubScentCategory] = useState([]);
+  const [subBrandCategory, setSubBrandCategory] = useState([]);
+  const navigate = useNavigate();
+
+  const onChange = (category, id) => {
+    navigate(`/product-list/${category}/${id}`);
+  };
 
   useEffect(() => {
-    fetch('api주소', {
+    fetch(`http://10.58.52.220:8000/products/${SCENT}/:scentId`, {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',
       },
     })
       .then(response => response.json())
-      .then(result => setSubCategory(result.data));
-  }, [subCategory]);
+      .then(result =>
+        setSubScentCategory(mapDataToCategory(result.scentName, SCENT)),
+      );
+
+    fetch(`http://10.58.52.220:8000/products/${BRAND}/:brandId`, {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(result =>
+        setSubBrandCategory(mapDataToCategory(result.brandName, BRAND)),
+      );
+  }, []);
+
+  const mapDataToCategory = (data, category) => {
+    return data.map(item => ({
+      ...item,
+      category,
+    }));
+  };
+
+  // const updatedResultScent = mapDataToCategory(MOK, SCENT);
+  // const updatedResultBrand = mapDataToCategory(MOK1, BRAND);
 
   return (
     <div className="category">
       <div className="mainCategory">
         <label id="mainCategoryName">scent</label>
-        {MOK.map(data => (
-          <ul key={data.scent_id} className="scentSubCategory">
-            <li>{data.subCategory}</li>
+        {subScentCategory.map(data => (
+          <ul key={data.id} className="scentSubCategory">
+            <li onClick={onChange}>{data.name}</li>
           </ul>
         ))}
       </div>
       <div className="mainCategory">
         <label id="mainCategoryName">brand</label>
-        {MOK1.map(data => (
-          <ul key={data.brand_id} className="brandSubCategory">
-            <li>{data.subCategory}</li>
+        {subBrandCategory.map(data => (
+          <ul key={data.id} className="brandSubCategory">
+            <li onClick={() => onChange(data.category, data.id)}>
+              {data.name}
+            </li>
           </ul>
         ))}
       </div>
@@ -48,18 +83,18 @@ export default Category;
 //   { id: 1, MainCategory: 'scent' },
 //   { id: 2, MainCategory: 'brand' },
 // ];
-const MOK = [
-  { scent_id: 1, subCategory: '시트러스' },
-  { scent_id: 2, subCategory: '우디' },
-  { scent_id: 3, subCategory: '플로럴' },
-  { scent_id: 4, subCategory: '프로티' },
-  { scent_id: 5, subCategory: '머스크' },
-];
+// const MOK = [
+//   { id: 1, name: '시트러스' },
+//   { id: 2, name: '우디' },
+//   { id: 3, name: '플로럴' },
+//   { id: 4, name: '프로티' },
+//   { id: 5, name: '머스크' },
+// ];
 
-const MOK1 = [
-  { brand_id: 1, subCategory: '딥티크' },
-  { brand_id: 2, subCategory: '크리드' },
-  { brand_id: 3, subCategory: '조말론' },
-  { brand_id: 4, subCategory: '이솝' },
-  { brand_id: 5, subCategory: '펜할리곤스' },
-];
+// const MOK1 = [
+//   { id: 1, name: '딥티크' },
+//   { id: 2, name: '크리드' },
+//   { id: 3, name: '조말론' },
+//   { id: 4, name: '이솝' },
+//   { id: 5, name: '펜할리곤스' },
+// ];
