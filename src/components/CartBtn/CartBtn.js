@@ -9,8 +9,6 @@ const CartBtn = ({ productId }) => {
   const handleAddToCart = e => {
     e.stopPropagation();
 
-    alert('장바구니 담기 완료!');
-
     fetch('http://10.58.52.220:8000/users/addBusket', {
       method: 'POST',
       headers: {
@@ -22,6 +20,7 @@ const CartBtn = ({ productId }) => {
       }),
     }).then(res => {
       if (res.ok) {
+        alert('장바구니 담기 완료!');
         navigate(`/product-list/detail/${productId}`);
       }
     });

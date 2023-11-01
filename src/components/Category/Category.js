@@ -10,7 +10,7 @@ const Category = () => {
   const [subBrandCategory, setSubBrandCategory] = useState([]);
   const navigate = useNavigate();
 
-  const onChange = (category, id) => {
+  const goToProductList = (category, id) => {
     navigate(`/product-list/${category}/${id}`);
   };
 
@@ -47,18 +47,20 @@ const Category = () => {
   return (
     <div className="category">
       <div className="mainCategory">
-        <label id="mainCategoryName">scent</label>
+        <p className="mainCategoryName">scent</p>
         {subScentCategory.map(data => (
           <ul key={data.id} className="scentSubCategory">
-            <li onClick={onChange}>{data.name}</li>
+            <li onClick={() => goToProductList(data.category, data.id)}>
+              {data.name}
+            </li>
           </ul>
         ))}
       </div>
       <div className="mainCategory">
-        <label id="mainCategoryName">brand</label>
+        <p className="mainCategoryName">brand</p>
         {subBrandCategory.map(data => (
           <ul key={data.id} className="brandSubCategory">
-            <li onClick={() => onChange(data.category, data.id)}>
+            <li onClick={() => goToProductList(data.category, data.id)}>
               {data.name}
             </li>
           </ul>
