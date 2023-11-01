@@ -15,27 +15,26 @@ const Category = () => {
   };
 
   useEffect(() => {
-    fetch(`http://10.58.52.220:8000/products/${SCENT}/:scentId`, {
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json',
-      },
-    })
-      .then(response => response.json())
-      .then(result =>
-        setSubScentCategory(mapDataToCategory(result.scentName, SCENT)),
-      );
-
-    fetch(`http://10.58.52.220:8000/products/${BRAND}/:brandId`, {
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json',
-      },
-    })
-      .then(response => response.json())
-      .then(result =>
-        setSubBrandCategory(mapDataToCategory(result.brandName, BRAND)),
-      );
+    // fetch(`http://10.58.52.234:8000/products/${SCENT}/1`, {
+    //   method: 'GET',
+    //   headers: {
+    //     'Content-type': 'application/json',
+    //   },
+    // })
+    //   .then(response => response.json())
+    //   .then(result =>
+    //     setSubScentCategory(mapDataToCategory(result.scentName, SCENT)),
+    //   );
+    // fetch(`http://10.58.52.234:8000/products/${BRAND}/1`, {
+    //   method: 'GET',
+    //   headers: {
+    //     'Content-type': 'application/json',
+    //   },
+    // })
+    //   .then(response => response.json())
+    //   .then(result =>
+    //     setSubBrandCategory(mapDataToCategory(result.brandName, BRAND)),
+    //   );
   }, []);
 
   const mapDataToCategory = (data, category) => {
@@ -44,9 +43,6 @@ const Category = () => {
       category,
     }));
   };
-
-  // const updatedResultScent = mapDataToCategory(MOK, SCENT);
-  // const updatedResultBrand = mapDataToCategory(MOK1, BRAND);
 
   return (
     <div className="category">
@@ -74,9 +70,6 @@ const Category = () => {
 
 export default Category;
 
-//시트러스 / 우디/  플로럴 / 프로티 / 머스크
-//brand_id": 2,
-//         "scent_id": 1
 //MOK데이터
 
 // const MOK = [

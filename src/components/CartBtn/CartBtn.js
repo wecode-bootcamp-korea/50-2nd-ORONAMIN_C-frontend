@@ -4,31 +4,33 @@ import './CartBtn.scss';
 
 const CartBtn = ({ productId }) => {
   const navigate = useNavigate();
-
+  const token =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJrYWthb2RkZGRkQG5hdmVyLmNvbSIsIm5pY2tuYW1lIjoi7J287JqU7J28IOuwpOydmCDsi6zsi6ztlZwg6rOg7Iq064-E7LmYIiwic3RhdHVzIjowLCJpYXQiOjE2OTgzOTA2MzcsImV4cCI6MTczNDM5MDYzN30.FzeJQLsft8Z8nWsleGXGwWuqLsB6u-HzLNA-PsZ0pCA';
   const handleAddToCart = e => {
     e.stopPropagation();
 
     alert('장바구니 담기 완료!');
 
-    // fetch('http://10.58.52.234:8000/cart', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json;charset=utf-8',
-    //   },
-    //   body: JSON.stringify({
-    //     product_id: productId,
-    //   }),
-    // }).then(res => {
-    //   if (res.ok) {
-    //     navigate('/cart'); //장바구니에 상품추가 되는 기능 필요
-    //   }
-    // });
+    fetch('http://10.58.52.220:8000/users/addBusket', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        product_id: productId,
+      }),
+    }).then(res => {
+      if (res.ok) {
+        navigate(`/product-list/detail/${productId}`);
+      }
+    });
   };
 
   return (
     <div className="cartButtonContainer">
       <button className="btn" onClick={handleAddToCart}>
-        장바구니 담기
+        카트에 추가하기
       </button>
     </div>
   );

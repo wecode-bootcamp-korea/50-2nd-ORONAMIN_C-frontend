@@ -1,30 +1,34 @@
 .contanerDetail {
   display: flex;
-  background-color: #fffef2;
-  width: 100%;
-  height: 100%;
+  background-color: #fcf9ee;
+  width: 100vw;
+  line-height: normal;
+
+  .subDescriptionBody {
+    flex-basis: auto;
+    height: 100%;
+    width: 35%;
+    padding: 10px;
+    line-height: 1.6;
+    color: #252525;
+    font-size: 16px;
+    font-weight: 400;
+  }
 
   .subInfo {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-
-    .subDescriptionBody {
-      border: 1px solid purple;
-      padding: 80px 40px;
-      flex-basis: auto;
-      width: 33.33333%;
-      height: 700px;
-    }
+    width: fit-content;
   }
   .productList {
     display: grid;
+    grid-gap: 4px;
     justify-content: space-between;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    background-color: #fffef2;
+    background-color: #fcf9ee;
 
     .productGrid {
-      // border: 1px solid red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -32,20 +36,24 @@
       width: auto;
       height: auto;
       &:hover {
-        background-color: beige;
+        // background-color: rgba(51, 51, 51, 0.05);
+        // background-blend-mode: normal;
+        opacity: 100%;
       }
 
       .productImg {
-        border: 1px solid red;
-        width: 100%;
-        height: 100%;
-        padding: 40px 40px 40px;
+        width: -webkit-fill-available;
+        height: 400px;
+        padding: 10px 10px 10px;
+        background-color: rgba(51, 51, 51, 0.05);
+        object-fit: fill;
       }
 
       .itemInfo {
         display: flex;
         flex-direction: column;
         padding: 30px 40px;
+        width: max-content;
 
         .info1 {
           width: 100%;
