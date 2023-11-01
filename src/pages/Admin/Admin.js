@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 
 const Admin = () => {
   const [item, setItem] = useState({
-    name: '',
-    brand: '',
-    scent: '',
+    productName: '',
+    brandId: '',
+    scentId: '',
     price: 0,
+    description: '',
+    imageId: 27,
   });
   const [brand, setBrand] = useState({
     brandName: '',
@@ -15,6 +17,7 @@ const Admin = () => {
     scentName: '',
     scentDesc: '',
   });
+  const [id, setId] = useState(0);
   const token = localStorage.getItem('token');
 
   const handleItemChange = e => {
@@ -36,7 +39,49 @@ const Admin = () => {
   };
 
   const handlePost = () => {
-    fetch('http://10.58.52.222:8000/product/', {
+    fetch('http://10.58.52.234:8000/products/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(item),
+    })
+      .then(res => res.json())
+      .then(data => console.log(data));
+  };
+
+  const handleUpdate = () => {
+    const tmp = Object.fromEntries(
+      Object.entries(item).filter(
+        ([key, value]) =>
+          value !== '' && value !== null && value !== undefined && value !== 0,
+      ),
+    );
+    fetch(`http://10.58.52.234:8000/products/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(tmp),
+    });
+  };
+
+  const handleRead = item => {
+    fetch(`http://10.58.52.217:8000/${item}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: `Bearer ${token}`,
+      },
+    })
+      .then(res => res.json())
+      .then(data => console.log(data));
+  };
+
+  const handleItemPost = (kind, item) => {
+    fetch(`http://10.58.52.217:8000/${kind}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -46,9 +91,20 @@ const Admin = () => {
     });
   };
 
-  const handleRead = item => {
-    fetch(`http://10.58.52.222:8000/products/${item}`, {
-      method: 'GET',
+  const handleItemUpdate = (kind, item) => {
+    fetch(`http://10.58.52.217:8000/${kind}/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(item),
+    });
+  };
+
+  const handleDelete = () => {
+    fetch(`http://10.58.52.234:8000/products/${id}`, {
+      method: 'DELETE',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         authorization: `Bearer ${token}`,
@@ -65,22 +121,31 @@ const Admin = () => {
         <input name="price" onChange={handleItemChange} />
         <input name="description" onChange={handleItemChange} />
         <button onClick={handlePost}>물품 등록</button>
+        <button onClick={handleUpdate}>물품 수정</button>
       </div>
       <div>
-        <button>브랜드 목록</button>
+        <button onClick={() => handleRead('brands')}>브랜드 목록</button>
         <input name="brandName" onChange={handleBrandChange} />
         <input name="brandLogo" onChange={handleBrandChange} />
-        <button onClick={() => handleRead(brand)}>브랜드 등록</button>
+        <button onClick={() => handleItemPost('brands', brand)}>
+          브랜드 등록
+        </button>
+        <button onClick={() => handleItemUpdate('brands', brand)}>
+          브랜드 수정
+        </button>
       </div>
       <div>
-        <button>향 목록</button>
+        <button onClick={() => handleRead('scents')}>향 목록</button>
         <input name="scentName" onChange={handleScentChange} />
         <input name="scentDesc" onChange={handleScentChange} />
-        <button onClick={() => handleRead(scent)}>브랜드 등록</button>
+        <button onClick={() => handleItemPost('scents', scent)}>향 등록</button>
+        <button onClick={() => handleItemUpdate('scents', scent)}>
+          향 수정
+        </button>
       </div>
       <div>
-        <input />
-        <button>물품 삭제</button>
+        <input onChange={e => setId(e.target.value)} />
+        <button onClick={handleDelete}>물품 삭제</button>
       </div>
     </div>
   );

@@ -9,7 +9,6 @@ const Cart = () => {
   const token = localStorage.getItem('token');
 
   useEffect(() => {
-    // fetch('/data/data.json')
     fetch('http://10.58.52.220:8000/users/order', {
       method: 'GET',
       headers: {
@@ -79,7 +78,7 @@ const Cart = () => {
     });
   };
 
-  const handleCheckedDelete = selected => {
+  const handleCheckedDelete = () => {
     selected.forEach(itemId => {
       fetch('http://10.58.52.220:8000/users/deleteProduct', {
         method: 'POST',
@@ -126,7 +125,10 @@ const Cart = () => {
                 <td>{item.product_price}</td>
                 <td>
                   <div>
-                    <button onClick={() => handleMinus(item.product_id)}>
+                    <button
+                      disabled={item.basket_quantity === 1}
+                      onClick={() => handleMinus(item.product_id)}
+                    >
                       -
                     </button>
                     <span id="countbox">{item.basket_quantity}</span>
@@ -162,7 +164,7 @@ const Cart = () => {
             </td>
             <td />
             <td id="deletebox">
-              <button onClick={() => handleCheckedDelete(selected)}>X</button>
+              <button onClick={handleCheckedDelete}>X</button>
             </td>
           </tr>
         </tbody>
