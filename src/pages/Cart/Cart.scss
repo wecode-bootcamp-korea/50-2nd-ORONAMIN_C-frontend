@@ -73,8 +73,8 @@ table {
 
     thead {
       border-bottom: 3px solid $primary-color;
-      th {
-      }
+      // th {
+      // }
     }
 
     tbody {
@@ -139,13 +139,13 @@ table {
     }
   }
 
-  tr:nth-of-type(even) {
-    //background: $gray-color;
-    td {
-      &:before {
-      }
-    }
-  }
+  // tr:nth-of-type(even) {
+  //background: $gray-color;
+  // td {
+  //   &:before {
+  //   }
+  // }
+  // }
 }
 
 @mixin rwdSecond {
@@ -193,10 +193,10 @@ table {
 
   tr:nth-of-type(even) {
     background: none;
-    td {
-      &:before {
-      }
-    }
+    // td {
+    //   &:before {
+    //   }
+    // }
   }
 }
 

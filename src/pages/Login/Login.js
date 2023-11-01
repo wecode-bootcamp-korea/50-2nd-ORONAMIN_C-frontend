@@ -6,7 +6,7 @@ const Login = () => {
   const [pw, setPw] = useState('');
   const navigate = useNavigate();
   const handleClick = () => {
-    fetch('http://10.58.52.218:8000/users/signin', {
+    fetch('http://10.58.52.212:8000/users/signin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

@@ -6,13 +6,14 @@ const Pay = () => {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
   const [address, setAddress] = useState('');
+  const [sum, setSum] = useState(0);
   const [checked, setChecked] = useState(false);
   const [cart, setCart] = useState([]);
   const token = localStorage.getItem('token');
 
   useEffect(() => {
     // fetch('/data/user.json');
-    fetch('http://10.58.52.218:8000/users/info', {
+    fetch('http://10.58.52.212:8000/users/info', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -24,7 +25,7 @@ const Pay = () => {
   }, []);
   useEffect(() => {
     // fetch('/data/data.json')
-    fetch('http://10.58.52.83:8000/users/order', {
+    fetch('http://10.58.52.220:8000/users/order', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -34,7 +35,11 @@ const Pay = () => {
       .then(res => res.json())
       .then(data => setCart(data));
   }, []);
-
+  useEffect(() => {
+    setSum(
+      cart.reduce((acc, v) => acc + v.product_price * v.basket_quantity, 0),
+    );
+  }, [cart]);
   const handleCheck = () => {
     setChecked(!checked);
     if (!checked) setAddress(user.address);
@@ -42,8 +47,33 @@ const Pay = () => {
   };
 
   const handlePay = () => {
-    alert('hello!');
-    navigate('/cart');
+    // alert('hello!');
+    // navigate('/cart');
+    const tmp = cart.map(item => {
+      return { ...item, id: item.product_id, quantity: item.basket_quantity };
+    });
+    fetch('http://10.58.52.220:8000/users/payBusket', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        order_number: '1234',
+        total_price: sum,
+        address,
+        products: tmp,
+      }),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.message === 'PAYMENT COMPLETE!') {
+          alert('결제가 정상 처리되었습니다!');
+          navigate('/login');
+        } else {
+          alert('결제 도중 오류가 발생했습니다.');
+        }
+      });
   };
 
   return (
@@ -82,7 +112,13 @@ const Pay = () => {
             </div>
           );
         })}
-        <div>총액 : {cart.reduce((acc, v) => acc + v.price * v.count, 0)}</div>
+        <div>
+          총액 :{sum}
+          {/* {cart.reduce(
+            (acc, v) => acc + v.product_price * v.basket_quantity,
+            0,
+          )} */}
+        </div>
       </div>
       <div>
         <button id="orderBtn" onClick={handlePay}>

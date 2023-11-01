@@ -10,7 +10,7 @@ const Cart = () => {
 
   useEffect(() => {
     // fetch('/data/data.json')
-    fetch('http://10.58.52.83:8000/users/order', {
+    fetch('http://10.58.52.220:8000/users/order', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -36,16 +36,7 @@ const Cart = () => {
   };
 
   const handleMinus = id => {
-    // const tmp = cartItems.filter(item => item.id === id)[0];
-    // if (tmp.count <= 1) return;
-    // else tmp.count--;
-    // const next = [];
-    // cartItems.map(item => {
-    //   if (item.id === tmp.id) next.push(tmp);
-    //   else next.push(item);
-    // });
-    // setCartItems([...next]);
-    fetch('http://10.58.52.83:8000/users/cutProduct', {
+    fetch('http://10.58.52.220:8000/users/cutProduct', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -60,15 +51,7 @@ const Cart = () => {
   };
 
   const handlePlus = id => {
-    // const tmp = cartItems.filter(item => item.id === id)[0];
-    // tmp.count++;
-    // const next = [];
-    // cartItems.map(item => {
-    //   if (item.id === tmp.id) next.push(tmp);
-    //   else next.push(item);
-    // });
-    // setCartItems([...next]);
-    fetch('http://10.58.52.83:8000/users/addProduct', {
+    fetch('http://10.58.52.220:8000/users/addProduct', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -83,30 +66,36 @@ const Cart = () => {
   };
 
   const handleDelete = itemId => {
-    setCartItems(cartItems.filter(ele => ele.id !== itemId));
+    // setCartItems(cartItems.filter(ele => ele.id !== itemId));
+    fetch('http://10.58.52.220:8000/users/deleteProduct', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        product_id: itemId,
+      }),
+    });
   };
 
   const handleCheckedDelete = selected => {
-    let tmp = [];
-    selected.forEach(item => (tmp = cartItems.filter(ele => ele.id !== item)));
-    selected.forEach(item => (tmp = tmp.filter(ele => ele.id !== item)));
-    setCartItems(tmp);
+    selected.forEach(itemId => {
+      fetch('http://10.58.52.220:8000/users/deleteProduct', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          product_id: itemId,
+        }),
+      });
+    });
   };
 
   const isAllChecked =
-    selected.length === cartItems.length && selected.length !== 0;
-
-  // const handleClick = () => {
-  //   fetch('', {
-  //     method: 'POST',
-  //     headers: {
-  //       a: 'a',
-  //     },
-  //     body: JSON.stringify({
-  //       cart: cartItems,
-  //     }),
-  //   });
-  // };
+    selected.length === cartItems.length && cartItems.length !== 0;
 
   return (
     <div id="Cart">
