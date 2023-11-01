@@ -1,0 +1,21 @@
+.category {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  .mainCategoryName:hover ~ .scentSubCategory {
+    display: block;
+  }
+
+  .scentSubCategory {
+    display: none;
+  }
+
+  .mainCategoryName:hover ~ .brandSubCategory {
+    display: block;
+  }
+
+  .brandSubCategory {
+    display: none;
+  }
+}
