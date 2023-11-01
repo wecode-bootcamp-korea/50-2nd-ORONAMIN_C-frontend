@@ -7,12 +7,12 @@
   background-color: #fcf9ee;
 
   .itemImg {
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    object-fit: contain;
+    padding: 10px;
   }
 
   .itemDetailInfo {
-    border: 1px solid red;
     height: 100vh;
     width: 50%;
     padding: 20px 16px;
@@ -67,6 +67,7 @@
 
       .itemScent {
         color: #333333;
+        font-weight: 700;
       }
 
       .itemScentName {
