@@ -27,17 +27,30 @@
   flex-direction: column;
   margin: 20px;
   // border: 1px solid black;
-  .row {
-    display: table-row;
+  // .row {
+  //   display: table-row;
+  // }
+  .container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(50px, auto));
+    min-width: 40%;
+    max-width: 70%;
+    .cell {
+      display: table-cell;
+      padding: 6px 12px;
+      min-width: 100px;
+      text-align: center;
+      border: 1px solid black;
+    }
   }
 
-  .cell {
-    display: table-cell;
-    padding: 6px 12px;
-    min-width: 100px;
-    text-align: center;
-    border: 1px solid black;
-  }
+  // .cell {
+  //   display: table-cell;
+  //   padding: 6px 12px;
+  //   min-width: 100px;
+  //   text-align: center;
+  //   border: 1px solid black;
+  // }
 }
 
 .orderBtn {

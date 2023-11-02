@@ -97,7 +97,7 @@ const Pay = () => {
         </div>
       </div>
       <div className="cartDB">
-        <div className="row header">
+        {/* <div className="row header">
           <div className="cell">물품명</div>
           <div className="cell">가격</div>
           <div className="cell">수량</div>
@@ -110,7 +110,21 @@ const Pay = () => {
               <div className="cell">{item.basket_quantity}</div>
             </div>
           );
-        })}
+        })} */}
+        <div className="container">
+          <div className="cell">물품명</div>
+          <div className="cell">가격</div>
+          <div className="cell">수량</div>
+          {cart.map(item => {
+            return (
+              <>
+                <div className="cell">{item.product_name}</div>
+                <div className="cell">{item.product_price}</div>
+                <div className="cell">{item.basket_quantity}</div>
+              </>
+            );
+          })}
+        </div>
         <div>총액 :{sum}</div>
         <p>현재 포인트 : {user.point}</p>
       </div>
