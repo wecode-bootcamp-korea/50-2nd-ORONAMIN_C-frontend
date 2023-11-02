@@ -79,12 +79,13 @@ const Pay = () => {
   return (
     <div className="Pay">
       <div className="userDB">
+        <div className="userText">주문자 정보</div>
         <p>주문자 : {user.nickname}</p>
         <p>주소 : {user.address}</p>
         <p>전화번호 : {user.phone}</p>
       </div>
       <div className="addressBox">
-        <p>배송 주소 :</p>
+        <div className="addressText">배송 주소 :</div>
         <input
           className="address"
           value={address}
@@ -125,7 +126,7 @@ const Pay = () => {
             );
           })}
         </div>
-        <div>총액 :{sum}</div>
+        <p>총액 :{sum}</p>
         <p>현재 포인트 : {user.point}</p>
       </div>
       <div>
