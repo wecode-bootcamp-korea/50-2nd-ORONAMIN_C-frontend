@@ -25,7 +25,7 @@ const Pay = () => {
   }, []);
   useEffect(() => {
     // fetch('/data/data.json')
-    fetch('http://10.58.52.220:8000/users/order', {
+    fetch('http://10.58.52.220:8000/orders/order', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -52,7 +52,7 @@ const Pay = () => {
     const tmp = cart.map(item => {
       return { ...item, id: item.product_id, quantity: item.basket_quantity };
     });
-    fetch('http://10.58.52.220:8000/users/payBusket', {
+    fetch('http://10.58.52.220:8000/orders/paymentBasket', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
