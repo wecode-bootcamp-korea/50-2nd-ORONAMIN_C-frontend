@@ -1,9 +1,20 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Nav.scss';
 
 const Nav = () => {
+  const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
+  const isLoggedIn = !!localStorage.getItem('token');
+
+  const handleLogout = () => {
+    const isLogoutConfirmed = confirm('로그아웃 하시겠습니까?');
+
+    if (isLogoutConfirmed) {
+      localStorage.removeItem('token');
+      navigate('/main');
+    }
+  };
 
   return (
     <div className="nav">
@@ -59,15 +70,29 @@ const Nav = () => {
           <img alt="logoimg" src="/images/logo.png" />
         </div>
         <ul className="header_links">
-          <li>
-            <a>회원 가입</a>
-          </li>
-          <li>
-            <a>로그인</a>
-          </li>
-          {/* <li>
-                <a></a>
-              </li> */}
+          {isLoggedIn ? (
+            <>
+              <li>
+                <p className="btn" onClick={handleLogout}>
+                  로그아웃
+                </p>
+              </li>
+              <li>
+                <p className="btn" onClick={() => navigate('/cart')}>
+                  장바구니
+                </p>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <Link to="/signup">회원 가입</Link>
+              </li>
+              <li>
+                <Link to="/login">로그인</Link>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </div>
