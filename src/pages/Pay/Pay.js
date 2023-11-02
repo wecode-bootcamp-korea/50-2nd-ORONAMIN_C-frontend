@@ -97,7 +97,6 @@ const Pay = () => {
         </div>
       </div>
       <div className="cartDB">
-        <p>현재 포인트 : {user.point}</p>
         <div className="row header">
           <div className="cell">물품명</div>
           <div className="cell">가격</div>
@@ -113,6 +112,7 @@ const Pay = () => {
           );
         })}
         <div>총액 :{sum}</div>
+        <p>현재 포인트 : {user.point}</p>
       </div>
       <div>
         <button className="orderBtn" onClick={handlePay}>
