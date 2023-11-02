@@ -1,15 +1,13 @@
-import React from 'react';
 import { useEffect, useState } from 'react';
-import './Login.scss';
-import logo from './logo.png';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import logo from './logo.png';
+import './Login.scss';
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [color, setColor] = useState('red');
   const goToMain = () => {
     navigate('/main');
   };
@@ -41,15 +39,6 @@ const Login = () => {
         }
       });
   };
-
-  // useEffect(() => {
-  //   const isCorrect = email.includes('@') && password.length >= 5;
-  //   if (isCorrect) {
-  //     setColor('blue');
-  //   } else {
-  //     setColor('red');
-  //   }
-  // }, [email, password]);
   return (
     <div className="Login">
       <div className="titleWrap">로그인</div>
@@ -64,7 +53,6 @@ const Login = () => {
             placeholder="이메일"
             type="text"
             onChange={handleEmail}
-            // onchange={e => setEmail(e.target.value)}
           />
         </div>
         <div className="inputTitle">비밀번호</div>
@@ -77,9 +65,6 @@ const Login = () => {
           />
         </div>
       </div>
-      {/* <Link to="/signup" style={{ textDecoration: 'none' }}>
-        <div className="go">회원가입</div>
-      </Link> */}
       <div>
         <button className="btn" onClick={handleClick}>
           로그인
