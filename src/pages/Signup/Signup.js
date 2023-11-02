@@ -77,7 +77,7 @@ const Signup = () => {
     }
   };
   const isValid = () => {
-    const regExp = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/;
+    const regExp = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/;
     const regExpBirth = /^\d{4}-\d{2}-\d{2}$/;
     const regExpEmail =
       /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;

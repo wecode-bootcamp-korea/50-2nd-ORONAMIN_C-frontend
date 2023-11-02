@@ -9,7 +9,8 @@ const Cart = () => {
   const token = localStorage.getItem('token');
 
   const getCartList = () => {
-    fetch('http://10.58.52.220:8000/orders/', {
+    // fetch('/data/data.json')
+    fetch('http://13.53.170.233:8000/orders/', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -39,7 +40,7 @@ const Cart = () => {
   };
 
   const handleMinus = id => {
-    fetch('http://10.58.52.220:8000/orders/userProductQuantity', {
+    fetch('http://13.53.170.233:8000/orders/userProductQuantity', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -58,7 +59,7 @@ const Cart = () => {
   };
 
   const handlePlus = id => {
-    fetch('http://10.58.52.220:8000/orders/ProductQuantity', {
+    fetch('http://13.53.170.233:8000/orders/ProductQuantity', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -77,7 +78,7 @@ const Cart = () => {
   };
 
   const handleDelete = itemId => {
-    fetch('http://10.58.52.220:8000/orders/busket', {
+    fetch('http://13.53.170.233:8000/orders/busket', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -98,7 +99,7 @@ const Cart = () => {
   const handleCheckedDelete = () => {
     selected
       .forEach(itemId => {
-        fetch('http://10.58.52.220:8000/orders/busket', {
+        fetch('http://13.53.170.233:8000/orders/busket', {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json;charset=utf-8',
@@ -146,7 +147,10 @@ const Cart = () => {
                     checked={selected.includes(item.product_id)}
                   />
                 </td>
-                <td>{item.product_name}</td>
+                <td className="name_img">
+                  <span>{item.product_name}</span>
+                  <img className="img" src={item.product_img} />
+                </td>
                 <td>{item.product_price}</td>
                 <td>
                   <div>

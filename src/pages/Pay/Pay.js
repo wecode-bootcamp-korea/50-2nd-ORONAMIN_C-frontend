@@ -12,6 +12,7 @@ const Pay = () => {
   const token = localStorage.getItem('token');
 
   useEffect(() => {
+    // fetch('/data/user.json')
     fetch('http://13.53.170.233:8000/users/info', {
       method: 'GET',
       headers: {
@@ -20,9 +21,10 @@ const Pay = () => {
       },
     })
       .then(res => res.json())
-      .then(data => setUser(data));
+      .then(data => setUser(data[0]));
   }, []);
   useEffect(() => {
+    // fetch('/data/data.json')
     fetch('http://13.53.170.233:8000/orders/', {
       method: 'GET',
       headers: {
@@ -45,12 +47,10 @@ const Pay = () => {
   };
 
   const handlePay = () => {
-    // alert('hello!');
-    // navigate('/cart');
     const tmp = cart.map(item => {
       return { ...item, id: item.product_id, quantity: item.basket_quantity };
     });
-    fetch('http://10.58.52.220:8000/orders/paymentBasket', {
+    fetch('http://13.53.170.233:8000/orders/paymentBasket', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
