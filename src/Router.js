@@ -1,5 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Nav from './components/Nav/Nav';
+import Main from './pages/main/Main';
+import Footer from './components/Footer/Footer';
 import Admin from './pages/Admin/Admin';
 import Cart from './pages/Cart/Cart';
 import Pay from './pages/Pay/Pay';
@@ -9,7 +12,9 @@ import ProductDetail from './pages/ProductDetail/ProductDetail';
 const Router = () => {
   return (
     <BrowserRouter>
+      <Nav />
       <Routes>
+        <Route path="/main" element={<Main />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/pay" element={<Pay />} />
         <Route path="/admin" element={<Admin />} />
@@ -20,6 +25,7 @@ const Router = () => {
           element={<ProductDetail />}
         />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };
