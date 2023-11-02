@@ -1,16 +1,11 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from './logo.png';
 import './Login.scss';
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const goToMain = () => {
-    navigate('/main');
-  };
 
   const handleEmail = e => {
     setEmail(e.target.value);
