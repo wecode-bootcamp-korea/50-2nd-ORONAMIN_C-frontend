@@ -8,7 +8,7 @@ const Nav = () => {
   const isLoggedIn = !!localStorage.getItem('token');
 
   const handleLogout = () => {
-    const isLogoutConfirmed = confirm('로그아웃 하시겠습니까?');
+    const isLogoutConfirmed = window.confirm('로그아웃 하시겠습니까?');
 
     if (isLogoutConfirmed) {
       localStorage.removeItem('token');
