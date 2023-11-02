@@ -19,25 +19,34 @@ const Login = () => {
     setPassword(e.target.value);
   };
   const handleClick = () => {
-    fetch('http://10.58.52.218:8000/users/signin', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.message === 'SIGNIN_SUCCESS') {
-          localStorage.setItem('token', data.token);
-          navigate('/signup');
-        } else {
-          alert('error');
-        }
-      });
+    if (isValid()) {
+      fetch('http://10.58.52.218:8000/users/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.message === 'SIGNIN_SUCCESS') {
+            localStorage.setItem('token', data.token);
+            navigate('/signup');
+          } else {
+            alert('error');
+          }
+        });
+    }
+  };
+  const isValid = () => {
+    const regExpEmail =
+      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    if (password.length < 10) return false;
+    if (!regExpEmail.test(email)) return false;
+    return true;
   };
   return (
     <div className="Login">
@@ -65,7 +74,7 @@ const Login = () => {
           />
         </div>
       </div>
-      <div>
+      <div className="btn1">
         <button className="btn" onClick={handleClick}>
           로그인
         </button>

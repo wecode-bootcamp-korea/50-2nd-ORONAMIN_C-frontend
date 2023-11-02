@@ -8,6 +8,9 @@ const Signup = () => {
   const [repw, setRepw] = useState('');
   const [birth, setBirth] = useState('');
   const [phone, setPhone] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [address, setAddress] = useState('');
+  const [sex, setSex] = useState('');
   const navigate = useNavigate();
 
   const goToLogin = () => {
@@ -28,19 +31,39 @@ const Signup = () => {
   const handlePhone = e => {
     setPhone(e.target.value);
   };
+  const handleNickname = e => {
+    setNickname(e.target.value);
+  };
+  const handleAddress = e => {
+    setAddress(e.target.value);
+  };
+  const handleSex = e => {
+    setSex(e.target.value);
+  };
+
+  const user = {
+    email,
+    password,
+    phone_number: phone,
+    birthday: birth,
+    nickname,
+    address,
+    gender: sex,
+  };
+  const tmp = {};
+  for (const key in user) {
+    if (user[key] !== '') {
+      tmp[key] = user[key];
+    }
+  }
   const correctPw = () => {
-    if (repw === password) {
+    if (isValid()) {
       fetch('http://10.58.52.218:8000/users/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
         },
-        body: JSON.stringify({
-          email,
-          password,
-          phone_number: phone,
-          birthday: birth,
-        }),
+        body: JSON.stringify(tmp),
       })
         .then(response => response.json())
         .then(data => {
@@ -53,6 +76,18 @@ const Signup = () => {
         });
     }
   };
+  const isValid = () => {
+    const regExp = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/;
+    const regExpBirth = /^\d{4}-\d{2}-\d{2}$/;
+    const regExpEmail =
+      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    if (repw !== password) return false;
+    if (password.length < 10) return false;
+    if (!regExp.test(phone)) return false;
+    if (!regExpEmail.test(email)) return false;
+    if (!regExpBirth.test(birth)) return false;
+    return true;
+  };
   return (
     <div className="signup">
       <div className="titleWrap">회원 가입</div>
@@ -64,6 +99,7 @@ const Signup = () => {
         <input
           className="input"
           placeholder="비밀번호"
+          type="password"
           onChange={handlePassword}
         />
       </div>
@@ -71,6 +107,7 @@ const Signup = () => {
         <input
           className="input"
           placeholder="비밀번호 확인"
+          type="password"
           onChange={handleRepw}
         />
       </div>
@@ -84,9 +121,24 @@ const Signup = () => {
           onChange={handlePhone}
         />
       </div>
-      <button className="btn" onClick={correctPw}>
-        회원 가입
-      </button>
+      <div className="inputWrap">
+        <input
+          className="input"
+          onChange={handleNickname}
+          placeholder="닉네임"
+        />
+      </div>
+      <div className="inputWrap">
+        <input className="input" onChange={handleAddress} placeholder="주소" />
+      </div>
+      <div className="inputWrap">
+        <input className="input" placeholder="성별" onChange={handleSex} />
+      </div>
+      <div className="btn1">
+        <button className="btn" onClick={correctPw}>
+          회원 가입
+        </button>
+      </div>
     </div>
   );
 };
