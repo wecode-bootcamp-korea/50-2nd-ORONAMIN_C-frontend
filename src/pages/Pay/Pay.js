@@ -77,16 +77,16 @@ const Pay = () => {
   };
 
   return (
-    <div id="Pay">
-      <div id="userDB">
+    <div className="Pay">
+      <div className="userDB">
         <p>주문자 : {user.nickname}</p>
         <p>주소 : {user.address}</p>
         <p>전화번호 : {user.phone}</p>
       </div>
-      <div id="addressBox">
+      <div className="addressBox">
         <p>배송 주소 :</p>
         <input
-          id="address"
+          className="address"
           value={address}
           placeholder="주소를 입력해 주세요"
           onChange={e => setAddress(e.target.value)}
@@ -96,32 +96,26 @@ const Pay = () => {
           <input type="checkbox" onChange={handleCheck} />
         </div>
       </div>
-      <div id="cartDB">
+      <div className="cartDB">
         <p>현재 포인트 : {user.point}</p>
-        <div id="row header">
-          <div id="cell">물품명</div>
-          <div id="cell">가격</div>
-          <div id="cell">수량</div>
+        <div className="row header">
+          <div className="cell">물품명</div>
+          <div className="cell">가격</div>
+          <div className="cell">수량</div>
         </div>
         {cart.map(item => {
           return (
-            <div key={item.product_id} id="row">
-              <div id="cell">{item.product_name}</div>
-              <div id="cell">{item.product_price}</div>
-              <div id="cell">{item.basket_quantity}</div>
+            <div key={item.product_id} className="row">
+              <div className="cell">{item.product_name}</div>
+              <div className="cell">{item.product_price}</div>
+              <div className="cell">{item.basket_quantity}</div>
             </div>
           );
         })}
-        <div>
-          총액 :{sum}
-          {/* {cart.reduce(
-            (acc, v) => acc + v.product_price * v.basket_quantity,
-            0,
-          )} */}
-        </div>
+        <div>총액 :{sum}</div>
       </div>
       <div>
-        <button id="orderBtn" onClick={handlePay}>
+        <button className="orderBtn" onClick={handlePay}>
           <p>결제하기</p>
         </button>
       </div>

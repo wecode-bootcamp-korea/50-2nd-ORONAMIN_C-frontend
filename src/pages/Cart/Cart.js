@@ -97,7 +97,7 @@ const Cart = () => {
     selected.length === cartItems.length && cartItems.length !== 0;
 
   return (
-    <div id="Cart">
+    <div className="Cart">
       <table id="rwd-table-large">
         <thead>
           <tr>
@@ -112,7 +112,7 @@ const Cart = () => {
           {cartItems.map(item => {
             return (
               <tr key={item.product_id}>
-                <td id="checkbox">
+                <td className="checkbox">
                   <input
                     type="checkbox"
                     onChange={e =>
@@ -131,13 +131,13 @@ const Cart = () => {
                     >
                       -
                     </button>
-                    <span id="countbox">{item.basket_quantity}</span>
+                    <span className="countbox">{item.basket_quantity}</span>
                     <button onClick={() => handlePlus(item.product_id)}>
                       +
                     </button>
                   </div>
                 </td>
-                <td id="deletebox">
+                <td className="deletebox">
                   <button onClick={() => handleDelete(item.product_id)}>
                     X
                   </button>
@@ -146,7 +146,7 @@ const Cart = () => {
             );
           })}
           <tr>
-            <td id="checkbox">
+            <td className="checkbox">
               <input
                 type="checkbox"
                 onChange={e => handleAllCheck(e.target.checked)}
@@ -163,7 +163,7 @@ const Cart = () => {
               </p>
             </td>
             <td />
-            <td id="deletebox">
+            <td className="deletebox">
               <button onClick={handleCheckedDelete}>X</button>
             </td>
           </tr>
@@ -171,7 +171,7 @@ const Cart = () => {
       </table>
       <div>
         <button
-          id="payBtn"
+          className="payBtn"
           onClick={() => {
             if (cartItems.length) navigate('/pay');
           }}

@@ -1,21 +1,20 @@
-#Pay {
-  // background-color: #fffef2;
+.Pay {
   background-color: #fcf9ee;
   min-height: 40rem;
   // border: 1px solid black;
   padding: 15px;
 }
 
-#userDB {
+.userDB {
   margin: 20px;
   // border: 1px solid black;
 }
 
-#addressBox {
+.addressBox {
   margin: 20px;
   // border: 1px solid black;
   gap: 10px;
-  #address {
+  .address {
     margin: 10px 0 10px 0;
     width: 50%;
     height: 30px;
@@ -23,16 +22,16 @@
   }
 }
 
-#cartDB {
+.cartDB {
   display: flex;
   flex-direction: column;
   margin: 20px;
   // border: 1px solid black;
-  #row {
+  .row {
     display: table-row;
   }
 
-  #cell {
+  .cell {
     display: table-cell;
     padding: 6px 12px;
     min-width: 100px;
@@ -41,7 +40,7 @@
   }
 }
 
-#orderBtn {
+.orderBtn {
   width: 20em;
   height: 5em;
   float: right;

@@ -4,7 +4,7 @@ $medium-up: 600px;
 $large-up: 1000px;
 $global-radius: 4px;
 
-#Cart {
+.Cart {
   background-color: #fcf9ee;
   min-height: 40rem;
   border: 1px solid black;
@@ -30,7 +30,7 @@ table {
   margin: 2em;
   // table-layout: fixed;
   thead {
-    border-bottom: 3px solid $primary-color;
+    border-bottom: 3px solid $gray-color;
     th {
       padding: 0.35em 0 0.35em;
       font-weight: 400;
@@ -41,7 +41,7 @@ table {
   }
 
   tbody {
-    border-bottom: 3px solid $primary-color;
+    border-bottom: 3px solid $gray-color;
     tr {
       border-bottom: 2px solid #ddd;
 
@@ -225,14 +225,14 @@ table {
   }
 }
 
-#payBtn {
+.payBtn {
   width: 20em;
   height: 5em;
   // float: right;
   display: inline-block;
   margin-left: 45%;
   border-radius: 5px;
-  background-color: #2d71f7;
+  background-color: $gray-color;
   opacity: 0.8;
   &:hover {
     opacity: 1;
@@ -244,26 +244,26 @@ table {
   }
 }
 
-#checkbox {
+.checkbox {
   width: 5%;
 }
 
-#countbox {
+.countbox {
   width: 100px;
 }
 
-#item {
+.item {
   width: 35%;
 }
 
-#price {
+.price {
   width: 25%;
 }
 
-#count {
+.count {
   width: 25%;
 }
 
-#deletebox {
+.deletebox {
   width: 10%;
 }
