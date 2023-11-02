@@ -3,11 +3,16 @@ import { useEffect, useState } from 'react';
 import './Login.scss';
 import logo from './logo.png';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   // const [color, setColor] = useState('red');
+  const goToMain = () => {
+    navigate('/main');
+  };
 
   const handleEmail = e => {
     setEmail(e.target.value);
@@ -15,21 +20,22 @@ const Login = () => {
   const handlePw = e => {
     setPassword(e.target.value);
   };
-  const handleColor = () => {
-    fetch('', {
+  const handleClick = () => {
+    fetch('http://10.58.52.218:8000/users/signin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify({
-        email: email,
-        password: password,
+        email,
+        password,
       }),
     })
       .then(res => res.json())
       .then(data => {
-        if (data.message === 'SUCCESS') {
+        if (data.message === 'SIGNIN_SUCCESS') {
           localStorage.setItem('token', data.token);
+          navigate('/signup');
         } else {
           alert('error');
         }
@@ -57,7 +63,7 @@ const Login = () => {
             className="input"
             placeholder="이메일"
             type="text"
-            onchange={handleEmail}
+            onChange={handleEmail}
             // onchange={e => setEmail(e.target.value)}
           />
         </div>
@@ -67,15 +73,15 @@ const Login = () => {
             className="input"
             placeholder="비밀번호"
             type="password"
-            onchange={handlePw}
+            onChange={handlePw}
           />
         </div>
       </div>
-      <Link to="/signup" style={{ textDecoration: 'none' }}>
+      {/* <Link to="/signup" style={{ textDecoration: 'none' }}>
         <div className="go">회원가입</div>
-      </Link>
+      </Link> */}
       <div>
-        <button className="btn" onclick={handleColor}>
+        <button className="btn" onClick={handleClick}>
           로그인
         </button>
       </div>
