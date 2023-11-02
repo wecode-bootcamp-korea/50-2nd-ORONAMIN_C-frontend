@@ -24,21 +24,26 @@ const ProductDetail = () => {
   }, [productId]);
 
   const goToAddProduct = ({ productId }) => {
-    fetch('http://10.58.52.220:8000/users/addBusket', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        product_id: productId,
-      }),
-    }).then(res => {
-      if (res.ok) {
-        alert('장바구니 담기 완료!');
-        navigate(`/product-list/detail/${productId}`);
-      }
-    });
+    if (token) {
+      fetch('http://10.58.52.220:8000/users/addBusket', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          product_id: productId,
+        }),
+      }).then(res => {
+        if (res.ok) {
+          alert('장바구니 담기 완료!');
+          navigate(`/product-list/detail/${productId}`);
+        }
+      });
+    } else {
+      alert('로그인 후에 이용가능합니다!');
+      navigate('/Login');
+    }
   };
 
   const formatPriceWithCommas = price => {
