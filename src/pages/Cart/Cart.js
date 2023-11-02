@@ -8,17 +8,21 @@ const Cart = () => {
   const [selected, setSelected] = useState([]);
   const token = localStorage.getItem('token');
 
+  const getCartList = () => {
+    fetch('http://10.58.52.220:8000/orders/order', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: `Bearer ${token}`,
+      },
+    })
+      .then(res => res.json())
+      .then(data => setCartItems(data));
+  };
+
   useEffect(() => {
-    // fetch('http://10.58.52.220:8000/orders/order', {
-    //   method: 'GET',
-    //   headers: {
-    //     'Content-Type': 'application/json;charset=utf-8',
-    //     authorization: `Bearer ${token}`,
-    //   },
-    // })
-    //   .then(res => res.json())
-    //   .then(data => setCartItems(data));
-  }, [cartItems]);
+    getCartList();
+  }, []);
 
   const handleCheck = (checked, id) => {
     if (checked) {
@@ -44,9 +48,13 @@ const Cart = () => {
       body: JSON.stringify({
         product_id: id,
       }),
-    })
-      .then(res => res.json())
-      .then(data => console.log(data));
+    }).then(res => {
+      if (res.ok) {
+        getCartList();
+      } else {
+        alert('에러가 발생했습니다.');
+      }
+    });
   };
 
   const handlePlus = id => {
@@ -59,13 +67,16 @@ const Cart = () => {
       body: JSON.stringify({
         product_id: id,
       }),
-    })
-      .then(res => res.json())
-      .then(data => console.log(data));
+    }).then(res => {
+      if (res.ok) {
+        getCartList();
+      } else {
+        alert('에러가 발생했습니다.');
+      }
+    });
   };
 
   const handleDelete = itemId => {
-    // setCartItems(cartItems.filter(ele => ele.id !== itemId));
     fetch('http://10.58.52.220:8000/orders/busket', {
       method: 'DELETE',
       headers: {
@@ -75,22 +86,36 @@ const Cart = () => {
       body: JSON.stringify({
         product_id: itemId,
       }),
+    }).then(res => {
+      if (res.ok) {
+        getCartList();
+      } else {
+        alert('에러가 발생했습니다.');
+      }
     });
   };
 
   const handleCheckedDelete = () => {
-    selected.forEach(itemId => {
-      fetch('http://10.58.52.220:8000/orders/busket', {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-          authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          product_id: itemId,
-        }),
+    selected
+      .forEach(itemId => {
+        fetch('http://10.58.52.220:8000/orders/busket', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            product_id: itemId,
+          }),
+        });
+      })
+      .then(res => {
+        if (res.ok) {
+          getCartList();
+        } else {
+          alert('에러가 발생했습니다.');
+        }
       });
-    });
   };
 
   const isAllChecked =

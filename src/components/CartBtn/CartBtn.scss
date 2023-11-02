@@ -1,0 +1,15 @@
+.cartButtonContainer {
+  position: relative;
+  display: inline-block;
+
+  cursor: pointer;
+
+  .btn {
+    background-color: #333;
+    color: #fff;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 30px;
+  }
+}
