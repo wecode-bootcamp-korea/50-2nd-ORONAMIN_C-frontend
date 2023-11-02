@@ -15,7 +15,7 @@ const Login = () => {
   };
   const handleClick = () => {
     if (isValid()) {
-      fetch('http://10.58.52.218:8000/users/signin', {
+      fetch('http://13.53.170.233:8000/users/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',

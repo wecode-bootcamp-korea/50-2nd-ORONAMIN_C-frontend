@@ -53,8 +53,7 @@
   .btn {
     width: 40%;
     height: 48px;
-    margin-left: 430px;
-    margin-top: 20px;
+    display: inline-block;
     border-radius: 4px;
     background-color: #000000;
     color: #dadada;
@@ -62,6 +61,9 @@
   .go {
     font-weight: 400;
     font-size: small;
+    text-align: center;
+  }
+  .btn1 {
     text-align: center;
   }
 }
