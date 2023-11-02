@@ -12,8 +12,7 @@ const Pay = () => {
   const token = localStorage.getItem('token');
 
   useEffect(() => {
-    // fetch('/data/user.json');
-    fetch('http://10.58.52.212:8000/users/info', {
+    fetch('http://13.53.170.233:8000/users/info', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -24,8 +23,7 @@ const Pay = () => {
       .then(data => setUser(data));
   }, []);
   useEffect(() => {
-    // fetch('/data/data.json')
-    fetch('http://10.58.52.220:8000/orders/order', {
+    fetch('http://13.53.170.233:8000/orders/', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
