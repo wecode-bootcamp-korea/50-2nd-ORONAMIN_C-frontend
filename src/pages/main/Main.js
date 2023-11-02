@@ -21,16 +21,11 @@ const Main = () => {
     setCarouselIdx(prev => prev + 1);
   };
 
-  const onChange = (category, id) => {
-    // navigate(`category , id`);
-  };
-
   const token =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJrYWthb0BuYXZlci5jb20iLCJuaWNrbmFtZSI6Iu2ZlOyalOydvCDrsKTsnZgg7ZmU64KcIO2YuOuekeydtCIsInN0YXR1cyI6MSwiaWF0IjoxNjk4MzkwNjY1LCJleHAiOjE3MzQzOTA2NjV9.NfIiRzeJDDADH3HgBQu6m3lO0Ui-EPBX033x6RQgK1Q';
 
   const [slideList, setslideList] = useState([]);
   useEffect(() => {
-    console.log('reviecve');
     fetch(`http://10.58.52.217:8000/images?desc=slideimg`, {
       method: 'GET',
       headers: {

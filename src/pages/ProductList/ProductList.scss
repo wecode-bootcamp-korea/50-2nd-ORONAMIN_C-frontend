@@ -1,0 +1,87 @@
+.contanerDetail {
+  display: flex;
+  background-color: #fcf9ee;
+  width: 100vw;
+  line-height: normal;
+
+  .subDescriptionBody {
+    flex-basis: auto;
+    height: 100%;
+    width: 35%;
+    padding: 10px;
+    line-height: 1.6;
+    color: #252525;
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  .subInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: fit-content;
+  }
+  .productList {
+    display: grid;
+    grid-gap: 4px;
+    justify-content: space-between;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    background-color: #fcf9ee;
+
+    .productGrid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: auto;
+      height: auto;
+      &:hover {
+        // background-color: rgba(51, 51, 51, 0.05);
+        // background-blend-mode: normal;
+        opacity: 100%;
+      }
+
+      .productImg {
+        width: -webkit-fill-available;
+        height: 400px;
+        padding: 10px 10px 10px;
+        background-color: rgba(51, 51, 51, 0.05);
+        object-fit: fill;
+      }
+
+      .itemInfo {
+        display: flex;
+        flex-direction: column;
+        padding: 30px 40px;
+        width: max-content;
+
+        .info1 {
+          width: 100%;
+          height: 100%;
+
+          .itemName {
+            color: #252525;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 15px;
+          }
+
+          .itemDescription {
+            padding: 3px 0px 0px;
+            font-size: 14px;
+            color: #666;
+          }
+        }
+
+        .info2 {
+          .price {
+            margin-top: 15px;
+            color: #333333;
+            font-size: 14px;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+}
