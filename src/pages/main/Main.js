@@ -25,17 +25,17 @@ const Main = () => {
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJrYWthb0BuYXZlci5jb20iLCJuaWNrbmFtZSI6Iu2ZlOyalOydvCDrsKTsnZgg7ZmU64KcIO2YuOuekeydtCIsInN0YXR1cyI6MSwiaWF0IjoxNjk4MzkwNjY1LCJleHAiOjE3MzQzOTA2NjV9.NfIiRzeJDDADH3HgBQu6m3lO0Ui-EPBX033x6RQgK1Q';
 
   const [slideList, setslideList] = useState([]);
-  useEffect(() => {
-    fetch(`http://10.58.52.217:8000/images?desc=slideimg`, {
-      method: 'GET',
-      headers: {
-        'Content-type': `application/json`,
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then(response => response.json())
-      .then(result => setslideList(result.result));
-  }, []);
+  // useEffect(() => {
+  //   fetch(`http://10.58.52.217:8000/images?desc=slideimg`, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-type': `application/json`,
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   })
+  //     .then(response => response.json())
+  //     .then(result => setslideList(result.result));
+  // }, []);
 
   return (
     <>
@@ -43,7 +43,7 @@ const Main = () => {
         <div className="container2">
           {/* img 는 fetch 로 받은 state 값으로 대체 할것. */}
 
-          <div className="slidebox">
+          {/* <div className="slidebox">
             <input type="radio" name="slide" id="slide01" checked />
             <input type="radio" name="slide" id="slide02" checked />
             <input type="radio" name="slide" id="slide03" checked />
@@ -61,7 +61,7 @@ const Main = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
 
           {/* <div className="sec1">
             <img width={2000} alt="img1" src="/images/img1.png" />
