@@ -9,7 +9,7 @@ const Cart = () => {
   const token = localStorage.getItem('token');
 
   const getCartList = () => {
-    fetch('http://10.58.52.220:8000/orders/order', {
+    fetch('http://10.58.52.220:8000/orders/', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

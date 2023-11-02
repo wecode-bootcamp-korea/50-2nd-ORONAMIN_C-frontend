@@ -5,26 +5,24 @@ $large-up: 1000px;
 $global-radius: 4px;
 
 @mixin heading-font-regular {
-  font-family: sans-serif;
+  font-family: 'Noto Sans KR', PingFang, Helvetica, Arial, sans-serif;
 }
 
 .Cart {
   background-color: #fcf9ee;
   min-height: 40rem;
-  border: 1px solid black;
   padding: 15px;
-
-  // main {
+  padding-left: 10%;
+  @include heading-font-regular; // main {
   //   padding: 2em;
   //   // float: left;
   //   width: 100%;
   // }
-
   ///BASIC TABLE STYLING
   table {
     border-collapse: collapse;
     display: block;
-    width: 90%;
+    width: 80%;
     // float: left;
     margin: 2em;
     // table-layout: fixed;
@@ -71,7 +69,7 @@ $global-radius: 4px;
       width: 90%;
 
       thead {
-        border-bottom: 3px solid $primary-color;
+        border-bottom: 3px solid #ddd;
         // th {
         // }
       }
