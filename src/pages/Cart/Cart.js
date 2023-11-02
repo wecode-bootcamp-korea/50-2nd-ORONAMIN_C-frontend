@@ -9,15 +9,15 @@ const Cart = () => {
   const token = localStorage.getItem('token');
 
   useEffect(() => {
-    fetch('http://10.58.52.220:8000/users/order', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        authorization: `Bearer ${token}`,
-      },
-    })
-      .then(res => res.json())
-      .then(data => setCartItems(data));
+    // fetch('http://10.58.52.220:8000/orders/order', {
+    //   method: 'GET',
+    //   headers: {
+    //     'Content-Type': 'application/json;charset=utf-8',
+    //     authorization: `Bearer ${token}`,
+    //   },
+    // })
+    //   .then(res => res.json())
+    //   .then(data => setCartItems(data));
   }, [cartItems]);
 
   const handleCheck = (checked, id) => {
@@ -35,7 +35,7 @@ const Cart = () => {
   };
 
   const handleMinus = id => {
-    fetch('http://10.58.52.220:8000/users/cutProduct', {
+    fetch('http://10.58.52.220:8000/orders/userProductQuantity', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -50,7 +50,7 @@ const Cart = () => {
   };
 
   const handlePlus = id => {
-    fetch('http://10.58.52.220:8000/users/addProduct', {
+    fetch('http://10.58.52.220:8000/orders/ProductQuantity', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -66,8 +66,8 @@ const Cart = () => {
 
   const handleDelete = itemId => {
     // setCartItems(cartItems.filter(ele => ele.id !== itemId));
-    fetch('http://10.58.52.220:8000/users/deleteProduct', {
-      method: 'POST',
+    fetch('http://10.58.52.220:8000/orders/busket', {
+      method: 'DELETE',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         authorization: `Bearer ${token}`,
@@ -80,8 +80,8 @@ const Cart = () => {
 
   const handleCheckedDelete = () => {
     selected.forEach(itemId => {
-      fetch('http://10.58.52.220:8000/users/deleteProduct', {
-        method: 'POST',
+      fetch('http://10.58.52.220:8000/orders/busket', {
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
           authorization: `Bearer ${token}`,
@@ -98,7 +98,7 @@ const Cart = () => {
 
   return (
     <div className="Cart">
-      <table id="rwd-table-large">
+      <table>
         <thead>
           <tr>
             <th />

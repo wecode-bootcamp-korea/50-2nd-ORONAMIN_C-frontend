@@ -70,11 +70,13 @@
   float: right;
   margin-right: 10%;
   border-radius: 5px;
-  background-color: #ddd;
-  opacity: 0.8;
+  background-color: #fcf9ee;
   &:hover {
-    opacity: 1;
+    background-color: black;
     transition: 0.7s;
+    p {
+      color: #fcf9ee;
+    }
   }
 
   p {
