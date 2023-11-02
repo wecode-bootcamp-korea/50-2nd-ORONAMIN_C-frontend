@@ -5,7 +5,6 @@ import './Main.scss';
 const SLIDE_TO_SHOW = 4;
 
 const Main = () => {
-  //  여기에 State , navigate , fetch 선언 추가 할것.
   const [carouselIdx, setCarouselIdx] = useState(0);
   const [bannerSlideIdx, setBannerSlideIdx] = useState(0);
   const [slideList, setSlideList] = useState([]);
