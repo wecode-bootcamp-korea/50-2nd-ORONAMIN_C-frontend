@@ -22,6 +22,7 @@
       font-size: 30px;
       font-weight: bold;
     }
+
     .header_links {
       display: flex;
       align-items: center;
@@ -80,6 +81,10 @@
             }
           }
         }
+      }
+
+      .btn {
+        cursor: pointer;
       }
     }
   }

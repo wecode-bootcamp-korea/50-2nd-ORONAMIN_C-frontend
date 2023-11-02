@@ -4,13 +4,14 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 import Nav from './components/Nav/Nav';
-import Main from './pages/main/Main';
+import Main from './pages/Main/Main';
 import Footer from './components/Footer/Footer';
 import Admin from './pages/Admin/Admin';
 import Cart from './pages/Cart/Cart';
 import Pay from './pages/Pay/Pay';
 import ProductList from './pages/ProductList/ProductList';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
+import Info from './pages/Info/Info';
 
 const Router = () => {
   return (
@@ -29,6 +30,7 @@ const Router = () => {
           path="/product-list/detail/:productId"
           element={<ProductDetail />}
         />
+        <Route path="/info" element={<Info />} />
       </Routes>
       <Footer />
     </BrowserRouter>
