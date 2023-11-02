@@ -58,7 +58,7 @@ const Signup = () => {
   }
   const correctPw = () => {
     if (isValid()) {
-      fetch('http://10.58.52.218:8000/users/signup', {
+      fetch('http://13.53.170.233:8000/users/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
