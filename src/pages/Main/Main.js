@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ITEM_LIST } from '../../components/Nav/map';
-import { ITEM_LIST2 } from '../../components/Nav/map';
+import { ITEM_LIST, ITEM_LIST2 } from './slideData.js';
 import './Main.scss';
 
 const SLIDE_TO_SHOW = 4;
@@ -8,14 +7,32 @@ const SLIDE_TO_SHOW = 4;
 const Main = () => {
   //  여기에 State , navigate , fetch 선언 추가 할것.
   const [carouselIdx, setCarouselIdx] = useState(0);
+  const [bannerSlideIdx, setBannerSlideIdx] = useState(0);
+  const [slideList, setSlideList] = useState([]);
 
   const slideToLeft = () => {
+    if (bannerSlideIdx === 0) {
+      setBannerSlideIdx(slideList.length - 1);
+    } else {
+      setBannerSlideIdx(prev => prev - 1);
+    }
+  };
+
+  const slideToRight = () => {
+    if (bannerSlideIdx === slideList.length - 1) {
+      setBannerSlideIdx(0);
+    } else {
+      setBannerSlideIdx(prev => prev + 1);
+    }
+  };
+
+  const carouselToLeft = () => {
     if (carouselIdx === 0) return;
 
     setCarouselIdx(prev => prev - 1);
   };
 
-  const slideToRight = () => {
+  const carouselToRight = () => {
     if (carouselIdx === ITEM_LIST.length - SLIDE_TO_SHOW) return;
 
     setCarouselIdx(prev => prev + 1);
@@ -23,8 +40,6 @@ const Main = () => {
 
   const token =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJrYWthb0BuYXZlci5jb20iLCJuaWNrbmFtZSI6Iu2ZlOyalOydvCDrsKTsnZgg7ZmU64KcIO2YuOuekeydtCIsInN0YXR1cyI6MSwiaWF0IjoxNjk4MzkwNjY1LCJleHAiOjE3MzQzOTA2NjV9.NfIiRzeJDDADH3HgBQu6m3lO0Ui-EPBX033x6RQgK1Q';
-
-  const [slideList, setslideList] = useState([]);
 
   useEffect(() => {
     fetch(`http://10.58.52.217:8000/images?desc=slideimg`, {
@@ -35,31 +50,41 @@ const Main = () => {
       },
     })
       .then(response => response.json())
-      .then(result => setslideList(result.result));
+      .then(result => setSlideList(result.result));
   }, []);
 
   return (
     <div className="main">
-      {/* img 는 fetch 로 받은 state 값으로 대체 할것. */}
-      <div className="slidebox">
-        <input type="radio" name="slide" id="slide01" checked />
-        <input type="radio" name="slide" id="slide02" checked />
-        <input type="radio" name="slide" id="slide03" checked />
-        <input type="radio" name="slide" id="slide04" checked />
-        <ul className="slidelist">
-          {slideList.map(slide => (
-            <li className="slideitem">
-              <div>
-                <label for="slide04" className="left" />
-                <label for="slide02" className="right" />
-                <a>
-                  <img src={slide.image_source}></img>
-                </a>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {slideList.length !== 0 && (
+        <div className="slidebox">
+          <ul
+            className="slidelist"
+            style={{
+              transform: `translateX(calc(-100% * ${bannerSlideIdx}))`,
+            }}
+          >
+            {slideList.map((slide, idx) => (
+              <li className="slideitem" key={idx}>
+                <img src={slide.image_source} />
+              </li>
+            ))}
+          </ul>
+          <div className="arrowContainer">
+            <img
+              className="arrow"
+              src="/images/left_arrow.png"
+              alt="left arrow"
+              onClick={slideToLeft}
+            />
+            <img
+              className="arrow"
+              src="/images/right_arrow.png"
+              alt="right arrow"
+              onClick={slideToRight}
+            />
+          </div>
+        </div>
+      )}
 
       <div className="sec2">
         <div className="boximage">
@@ -116,13 +141,13 @@ const Main = () => {
             className="arrow"
             src="/images/left_arrow.png"
             alt="left arrow"
-            onClick={slideToLeft}
+            onClick={carouselToLeft}
           />
           <img
             className="arrow"
             src="/images/right_arrow.png"
             alt="right arrow"
-            onClick={slideToRight}
+            onClick={carouselToRight}
           />
         </div>
       </div>
