@@ -29,7 +29,7 @@ const Login = () => {
         .then(data => {
           if (data.message === 'SIGNIN_SUCCESS') {
             localStorage.setItem('token', data.token);
-            navigate('/signup');
+            navigate('/');
           } else {
             alert('error');
           }

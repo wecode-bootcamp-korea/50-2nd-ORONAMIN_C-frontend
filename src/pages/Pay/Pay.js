@@ -9,6 +9,7 @@ const Pay = () => {
   const [sum, setSum] = useState(0);
   const [checked, setChecked] = useState(false);
   const [cart, setCart] = useState([]);
+  const [point, setPoint] = useState('');
   const token = localStorage.getItem('token');
 
   useEffect(() => {
@@ -21,17 +22,22 @@ const Pay = () => {
       },
     })
       .then(res => res.json())
-      .then(data => setUser(data[0]));
+      .then(data => {
+        setUser(data);
+        let tmp = data.point;
+        let result = tmp.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        setPoint(result);
+      });
   }, []);
   useEffect(() => {
-    // fetch('/data/data.json')
-    fetch('http://13.53.170.233:8000/orders/', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        authorization: `Bearer ${token}`,
-      },
-    })
+    fetch('/data/data.json')
+      // fetch('http://13.53.170.233:8000/orders/', {
+      //   method: 'GET',
+      //   headers: {
+      //     'Content-Type': 'application/json;charset=utf-8',
+      //     authorization: `Bearer ${token}`,
+      //   },
+      // })
       .then(res => res.json())
       .then(data => setCart(data));
   }, []);
@@ -111,13 +117,16 @@ const Pay = () => {
           );
         })} */}
         <div className="container">
-          <div className="cell">물품명</div>
-          <div className="cell">가격</div>
-          <div className="cell">수량</div>
+          <div className="headerCell">물품명</div>
+          <div className="headerCell">가격</div>
+          <div className="headerCell">수량</div>
           {cart.map(item => {
             return (
               <>
-                <div className="cell">{item.product_name}</div>
+                <div className="cell">
+                  <span>{item.product_name}</span>
+                  <img className="img" src={item.product_img} />
+                </div>
                 <div className="cell">{item.product_price}</div>
                 <div className="cell">{item.basket_quantity}</div>
               </>
@@ -125,7 +134,7 @@ const Pay = () => {
           })}
         </div>
         <p>총액 :{sum}</p>
-        <p>현재 포인트 : {user.point}</p>
+        <p>현재 포인트 : {point}</p>
       </div>
       <div>
         <button className="orderBtn" onClick={handlePay}>
