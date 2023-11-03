@@ -5,7 +5,7 @@
       "name": "잉글리쉬",
       "price": 220000,
       "description": "잉글리쉬 오크 앤 헤이즐넛은 삼림지대에서 자라난 헤이즐넛의 바삭거림, 그레이프프루트의 매력, 상쾌한 이끼의 느낌, 엘리미의 스파이스, 우디한 베티버를 충분히 로스팅한 오크에서 담아내어 흙내음과 녹색이 어우러진 고혹적인 향을 선사합니다.",
-      "image_source": "/images/sample.png",
+      "image_source": "/images/sample1.png",
       "scents_name": "스파이시"
     },
     {
@@ -13,7 +13,7 @@
       "name": "오크 앤 헤이즐넛",
       "price": 200000,
       "description": "잉글리쉬 오크 앤 헤이즐넛은 삼림지대에서 자라난 헤이즐넛의 바삭거림, 그레이프프루트의 매력, 상쾌한 이끼의 느낌, 엘리미의 스파이스, 우디한 베티버를 충분히 로스팅한 오크에서 담아내어 흙내음과 녹색이 어우러진 고혹적인 향을 선사합니다.",
-      "image_source": "/images/sample.png",
+      "image_source": "/images/sample1.png",
       "scents_name": "우디"
     },
     {
@@ -21,7 +21,7 @@
       "name": "헤이즐넛",
       "price": 180000,
       "description": "잉글리쉬 오크 앤 헤이즐넛은 삼림지대에서 자라난 헤이즐넛의 바삭거림, 그레이프프루트의 매력, 상쾌한 이끼의 느낌, 엘리미의 스파이스, 우디한 베티버를 충분히 로스팅한 오크에서 담아내어 흙내음과 녹색이 어우러진 고혹적인 향을 선사합니다.",
-      "image_source": "/images/sample.png",
+      "image_source": "/images/sample1.png",
       "scents_name": "시트러스"
     }
   ]

@@ -7,13 +7,12 @@ const ProductDetail = () => {
   const navigate = useNavigate();
   const { productId } = useParams();
 
-  const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJrYWthb2RkZGRkQG5hdmVyLmNvbSIsIm5pY2tuYW1lIjoi7J287JqU7J28IOuwpOydmCDsi6zsi6ztlZwg6rOg7Iq064-E7LmYIiwic3RhdHVzIjowLCJpYXQiOjE2OTgzOTA2MzcsImV4cCI6MTczNDM5MDYzN30.FzeJQLsft8Z8nWsleGXGwWuqLsB6u-HzLNA-PsZ0pCA';
+  const token = localStorage.getItem('token');
 
-  // `http://10.58.52.234:8000/product-list/detail/${productId}`
+  // `http://13.53.170.233:8000/product-list/detail/${productId}`
   // '/data/recommendData.json'
   useEffect(() => {
-    fetch(`http://10.58.52.234:8000/products/${productId}`, {
+    fetch(`http://13.53.170.233:8000/product-list/detail/${productId}`, {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',
@@ -25,7 +24,7 @@ const ProductDetail = () => {
 
   const goToAddProduct = ({ productId }) => {
     if (token) {
-      fetch('http://10.58.52.220:8000/users/addBusket', {
+      fetch('http://13.53.170.233:8000/orders/productBusket', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',

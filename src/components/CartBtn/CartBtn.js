@@ -4,13 +4,12 @@ import './CartBtn.scss';
 
 const CartBtn = ({ productId }) => {
   const navigate = useNavigate();
-  const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJrYWthb2RkZGRkQG5hdmVyLmNvbSIsIm5pY2tuYW1lIjoi7J287JqU7J28IOuwpOydmCDsi6zsi6ztlZwg6rOg7Iq064-E7LmYIiwic3RhdHVzIjowLCJpYXQiOjE2OTgzOTA2MzcsImV4cCI6MTczNDM5MDYzN30.FzeJQLsft8Z8nWsleGXGwWuqLsB6u-HzLNA-PsZ0pCA';
+  const token = localStorage.getItem('token');
 
   const handleAddToCart = e => {
     e.stopPropagation();
     if (token) {
-      fetch('http://10.58.52.220:8000/users/addBusket', {
+      fetch('http://13.53.170.233:8000/orders/productBusket', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',

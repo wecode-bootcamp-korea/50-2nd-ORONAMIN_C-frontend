@@ -17,12 +17,14 @@ const ProductList = () => {
   };
 
   // '/data/recommendData.json'
-  // `http://10.58.52.234:8000/products?${
+  // `http://13.53.170.233:8000/products?${
   //   isScent ? 'scentName' : 'brandName'
   // }=${id}`;
 
   useEffect(() => {
-    const api = '/data/productList.json';
+    const api = `http://13.53.170.233:8000/products?${
+      isScent ? 'scentName' : 'brandName'
+    }=${id}`;
 
     fetch(api)
       .then(response => response.json())
