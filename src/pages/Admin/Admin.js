@@ -39,7 +39,7 @@ const Admin = () => {
   };
 
   const handlePost = () => {
-    fetch('http://10.58.52.234:8000/products/', {
+    fetch('http://13.53.170.233:8000/products/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -58,7 +58,7 @@ const Admin = () => {
           value !== '' && value !== null && value !== undefined && value !== 0,
       ),
     );
-    fetch(`http://10.58.52.234:8000/products/${id}`, {
+    fetch(`http://13.53.170.233:8000/products/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -69,7 +69,7 @@ const Admin = () => {
   };
 
   const handleRead = item => {
-    fetch(`http://10.58.52.217:8000/${item}`, {
+    fetch(`http://13.53.170.233:8000/${item}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -81,7 +81,7 @@ const Admin = () => {
   };
 
   const handleItemPost = (kind, item) => {
-    fetch(`http://10.58.52.217:8000/${kind}`, {
+    fetch(`http://13.53.170.233:8000/${kind}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -92,7 +92,7 @@ const Admin = () => {
   };
 
   const handleItemUpdate = (kind, item) => {
-    fetch(`http://10.58.52.217:8000/${kind}/${id}`, {
+    fetch(`http://13.53.170.233:8000/${kind}/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -103,7 +103,7 @@ const Admin = () => {
   };
 
   const handleDelete = () => {
-    fetch(`http://10.58.52.234:8000/products/${id}`, {
+    fetch(`http://13.53.170.233:8000/products/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
