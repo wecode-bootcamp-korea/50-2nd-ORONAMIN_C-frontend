@@ -11,7 +11,7 @@
       "stock": null,
       "name": "시트러스",
       "brand_name": "조말론",
-      "image_source": "/images/sample.png"
+      "image_source": "/images/sample1.png"
     },
     {
       "id": 2,
@@ -23,7 +23,7 @@
       "stock": null,
       "name": "시트러스",
       "brand_name": "딥티크",
-      "image_source": "/images/sample.png"
+      "image_source": "/images/sample1.png"
     },
     {
       "id": 3,
@@ -35,7 +35,7 @@
       "stock": null,
       "name": "플로럴",
       "brand_name": "톰포드",
-      "image_source": "/images/sample.png"
+      "image_source": "/images/sample1.png"
     },
     {
       "id": 4,
@@ -47,7 +47,7 @@
       "stock": null,
       "name": "스파이시",
       "brand_name": "톰포드",
-      "image_source": "/images/sample.png"
+      "image_source": "/images/sample1.png"
     },
     {
       "id": 5,
@@ -59,7 +59,7 @@
       "stock": null,
       "name": "우디",
       "brand_name": "톰포드",
-      "image_source": "/images/sample.png"
+      "image_source": "/images/sample1.png"
     }
   ]
 }
