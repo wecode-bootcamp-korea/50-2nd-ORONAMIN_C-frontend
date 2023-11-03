@@ -1,0 +1,30 @@
+[
+  {
+    "product_id": 1,
+    "product_name": "사과",
+    "product_price": 1003,
+    "basket_quantity": 2,
+    "product_img": "/images/alt1.png"
+  },
+  {
+    "product_id": 2,
+    "product_name": "바나나",
+    "product_price": 3004,
+    "basket_quantity": 1,
+    "product_img": "/images/alt2.png"
+  },
+  {
+    "product_id": 3,
+    "product_name": "수박",
+    "product_price": 2005,
+    "basket_quantity": 1,
+    "product_img": "/images/alt3.png"
+  },
+  {
+    "product_id": 4,
+    "product_name": "포도",
+    "product_price": 8001,
+    "basket_quantity": 1,
+    "product_img": "/images/alt4.png"
+  }
+]

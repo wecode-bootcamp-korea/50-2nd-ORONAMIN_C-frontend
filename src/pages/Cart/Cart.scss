@@ -1,0 +1,147 @@
+$primary-color: #008cba;
+$gray-color: #ddd;
+$medium-up: 600px;
+$large-up: 1000px;
+$global-radius: 4px;
+
+@mixin heading-font-regular {
+  font-family: 'Noto Sans KR', PingFang, Helvetica, Arial, sans-serif;
+}
+
+.Cart {
+  background-color: #fcf9ee;
+  min-height: 40rem;
+  padding: 15px;
+  padding-left: 10%;
+  @include heading-font-regular; // main {
+  //   padding: 2em;
+  //   // float: left;
+  //   width: 100%;
+  // }
+  ///BASIC TABLE STYLING
+  table {
+    border-collapse: collapse;
+    display: inline-block;
+    width: 80%;
+    // float: left;
+    margin: 2em;
+    // table-layout: fixed;
+    thead {
+      border-bottom: 3px solid $gray-color;
+      th {
+        padding: 0.35em 0 0.35em;
+        font-weight: 400;
+        text-align: center;
+        @include heading-font-regular;
+        font-size: 1.25em;
+      }
+    }
+
+    tbody {
+      border-bottom: 3px solid $gray-color;
+      tr {
+        border-bottom: 2px solid #ddd;
+        .name_img {
+          display: flex;
+          text-align: center;
+          vertical-align: middle;
+          justify-content: center;
+          align-items: center;
+        }
+        td {
+          padding: 0.75em;
+          text-align: center;
+          vertical-align: middle;
+
+          span {
+            min-width: 100px;
+            padding: 3px;
+          }
+          img {
+            width: 50px;
+            height: 50px;
+          }
+        }
+      }
+    }
+
+    tfoot {
+      td {
+        padding: 0.35em 0 0.35em;
+
+        text-align: left;
+        @include heading-font-regular;
+        font-size: 1.25em;
+      }
+    }
+  }
+
+  @media screen and (min-width: $large-up) {
+    table {
+      width: 90%;
+
+      thead {
+        border-bottom: 3px solid #ddd;
+        // th {
+        // }
+      }
+
+      tbody {
+        tr {
+          border-bottom: 1px solid #ddd;
+          td {
+            span {
+              min-width: 100px;
+              padding: 3px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .payBtn {
+    width: 20em;
+    height: 5em;
+    // float: right;
+    display: inline-block;
+    margin-left: 45%;
+    border-radius: 5px;
+    background-color: #fcf9ee;
+    &:hover {
+      background-color: black;
+      transition: 0.7s;
+      p {
+        color: #fcf9ee;
+      }
+    }
+
+    p {
+      font-size: large;
+    }
+  }
+
+  .checkbox {
+    width: 5%;
+  }
+
+  .countbox {
+    width: 100px;
+  }
+
+  .item {
+    width: 35%;
+  }
+
+  .price {
+    width: 25%;
+  }
+
+  .count {
+    width: 25%;
+  }
+
+  .deletebox {
+    width: 10%;
+  }
+}
