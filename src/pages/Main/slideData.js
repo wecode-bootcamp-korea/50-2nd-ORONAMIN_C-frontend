@@ -92,3 +92,39 @@ export const ITEM_LIST2 = [
     price: '247,000',
   },
 ];
+
+export const SLIDE_ITEM = [
+  {
+    id: 1,
+    image_source: '/images/slideimg01.png',
+  },
+  {
+    id: 2,
+    image_source: '/images/slideimg02.png',
+  },
+  {
+    id: 3,
+    image_source: '/images/slideimg03.png',
+  },
+  {
+    id: 4,
+    image_source: '/images/slideimg04.png',
+  },
+];
+
+export const BOX_ITEM = [
+  {
+    id: 1,
+    image_source: '/images/img2.png',
+    text1: 'BYREDO',
+    text2: '컬렉션',
+    text3: '관련제품 더보기',
+  },
+  {
+    id: 2,
+    image_source: '/images/img3.png',
+    text1: 'Dipdyque',
+    text2: '컬렉션',
+    text3: '관련제품 더보기',
+  },
+];

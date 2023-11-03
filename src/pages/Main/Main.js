@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ITEM_LIST, ITEM_LIST2 } from './slideData.js';
+import { ITEM_LIST, ITEM_LIST2, SLIDE_ITEM, BOX_ITEM } from './slideData.js';
+import { Link, useNavigate } from 'react-router-dom';
 import './Main.scss';
 
 const SLIDE_TO_SHOW = 4;
@@ -7,18 +8,22 @@ const SLIDE_TO_SHOW = 4;
 const Main = () => {
   const [carouselIdx, setCarouselIdx] = useState(0);
   const [bannerSlideIdx, setBannerSlideIdx] = useState(0);
-  const [slideList, setSlideList] = useState([]);
+  // const [SlideList, setSlideList] = useState([]);
+  // // const [Boximg, setBoximg] = useState([]);
+  // // const [bestitem, setbestitem] = useState([]);
+  // // const [brand, setbrand] = useState([]);
+  // // const [scent, setscent] = useState([]);
 
   const slideToLeft = () => {
     if (bannerSlideIdx === 0) {
-      setBannerSlideIdx(slideList.length - 1);
+      setBannerSlideIdx(SLIDE_ITEM.length - 1);
     } else {
       setBannerSlideIdx(prev => prev - 1);
     }
   };
 
   const slideToRight = () => {
-    if (bannerSlideIdx === slideList.length - 1) {
+    if (bannerSlideIdx === SLIDE_ITEM.length - 1) {
       setBannerSlideIdx(0);
     } else {
       setBannerSlideIdx(prev => prev + 1);
@@ -37,24 +42,41 @@ const Main = () => {
     setCarouselIdx(prev => prev + 1);
   };
 
-  const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJrYWthb0BuYXZlci5jb20iLCJuaWNrbmFtZSI6Iu2ZlOyalOydvCDrsKTsnZgg7ZmU64KcIO2YuOuekeydtCIsInN0YXR1cyI6MSwiaWF0IjoxNjk4MzkwNjY1LCJleHAiOjE3MzQzOTA2NjV9.NfIiRzeJDDADH3HgBQu6m3lO0Ui-EPBX033x6RQgK1Q';
+  // useEffect(() => {
+  //   fetch(`http://13.53.170.233:8000/images?desc=slideimg`, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-type': `application/json`,
+  //     },
+  //   })
+  //     .then(response => response.json())
+  //     .then(result => setSlideList(result.result));
+  // }, []);
 
-  useEffect(() => {
-    fetch(`http://10.58.52.217:8000/images?desc=slideimg`, {
-      method: 'GET',
-      headers: {
-        'Content-type': `application/json`,
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then(response => response.json())
-      .then(result => setSlideList(result.result));
-  }, []);
+  // useEffect(() => {
+  //   fetch(`http://13.53.170.233:8000/images?desc=boximg`, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-type': `application/json`,
+  //     },
+  //   })
+  //     .then(response => response.json())
+  //     .then(result => setBoximg(result.result));
+  // }, []);
+
+  // useEffect(() => {
+  //   fetch(`http://13.53.170.233:8000/images?desc=slideimg`, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-type': `application/json`,
+  //     },
+  //   }).then(response => response.json());
+  //   .then(brand => setbrand(result.result));
+  // }, []);
 
   return (
     <div className="main">
-      {slideList.length !== 0 && (
+      {SLIDE_ITEM.length !== 0 && (
         <div className="slidebox">
           <ul
             className="slidelist"
@@ -62,7 +84,7 @@ const Main = () => {
               transform: `translateX(calc(-100% * ${bannerSlideIdx}))`,
             }}
           >
-            {slideList.map((slide, idx) => (
+            {SLIDE_ITEM.map((slide, idx) => (
               <li className="slideitem" key={idx}>
                 <img src={slide.image_source} />
               </li>
@@ -87,24 +109,47 @@ const Main = () => {
 
       <div className="sec2">
         <div className="boximage">
-          <img width={900} height={900} alt="img2" src="/images/img2.png" />
-          <a className="textbox_2">
-            <div className="textbox1_2">
-              <span>BYREDO </span>
-              <span>컬랙션</span>
-            </div>
-            <div className="textbox2_2">관련제품 더보기</div>
-          </a>
-        </div>
-        <div className="boximage">
-          <img width={900} height={900} alt="img3" src="/images/img3.png" />
-          <a className="textbox_2">
-            <div className="textbox1_2">
-              <span>BYREDO </span>
-              <span>컬랙션</span>
-            </div>
-            <div className="textbox2_2">관련제품 더보기</div>
-          </a>
+          {BOX_ITEM.map(box => {
+            return (
+              <>
+                <div key={box.id}>
+                  <img
+                    //
+                    width={900}
+                    height={900}
+                    alt="img2"
+                    src={box.image_source} //
+                  />
+
+                  <a className="textbox_2">
+                    <div className="textbox1_2">
+                      <span>{box.text1} </span>
+                      <span>{box.text2}</span>
+                    </div>
+                    <div className="textbox2_2">{box.text3}</div>
+                  </a>
+                  <div className="boximage">
+                    {/* <img
+                      //
+                      width={900}
+                      height={900}
+                      alt="img2"
+                      src={box.image_source} //
+                    /> */}
+
+                    {/* <img width={900} height={900} alt="img3" src="/images/img3.png" /> */}
+                    {/* <a className="textbox_2">
+                      <div className="textbox1_2">
+                        <span>BYREDO </span>
+                        <span>컬랙션</span>
+                      </div>
+                      <div className="textbox2_2">관련제품 더보기</div>
+                    </a> */}
+                  </div>
+                </div>
+              </>
+            );
+          })}
         </div>
       </div>
 
@@ -118,22 +163,26 @@ const Main = () => {
             }))`,
           }}
         >
-          {ITEM_LIST.map(item => (
-            <li
-              key={item.id}
-              style={{ width: `calc(100vw / ${SLIDE_TO_SHOW})` }}
-            >
-              <img src={item.src} />
+          {ITEM_LIST.map(
+            (
+              item, //
+            ) => (
+              <li
+                key={item.id}
+                style={{ width: `calc(100vw / ${SLIDE_TO_SHOW})` }}
+              >
+                <img src={item.src} />
 
-              <div className="detail">
-                <div className="brand">{item.brand}</div>
-                <div>
-                  {item.title} {item.volume}
+                <div className="detail">
+                  <div className="brand">{item.brand}</div>
+                  <div>
+                    {item.title} {item.volume}
+                  </div>
+                  <div>{item.price}</div>
                 </div>
-                <div>{item.price}</div>
-              </div>
-            </li>
-          ))}
+              </li>
+            ),
+          )}
         </ul>
         <div className="arrowContainer">
           <img

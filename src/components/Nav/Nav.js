@@ -1,20 +1,45 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import './Nav.scss';
 
 const Nav = () => {
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
   const isLoggedIn = !!localStorage.getItem('token');
+  const [brand, setbrand] = useState([]);
+  const [scent, setscent] = useState([]);
 
   const handleLogout = () => {
-    const isLogoutConfirmed = confirm('로그아웃 하시겠습니까?');
+    const isLogoutConfirmed = window.confirm('로그아웃 하시겠습니까?');
 
     if (isLogoutConfirmed) {
       localStorage.removeItem('token');
       navigate('/main');
     }
   };
+
+  useEffect(() => {
+    fetch(`http://13.53.170.233:8000/brands`, {
+      method: 'GET',
+      headers: {
+        'Content-type': `application/json`,
+      },
+    })
+      .then(response => response.json())
+      .then(result => setbrand(result.result));
+  }, []);
+
+  // useEffect(() => {
+  //   fetch(`http://13.53.170.233:8000/products/all/?scentName=${id}`, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-type': `application/json`,
+  //     },
+  //   })
+  //     .then(response => response.json())
+  //     .then(result => setscent(result.result));
+  // }, []);
 
   return (
     <div className="nav">
@@ -32,7 +57,7 @@ const Nav = () => {
               <div className="main">
                 <p>Scent</p>
                 <ul className="mega_lists">
-                  {SCENT_CATEGORY_LIST.map(({ id, text }) => (
+                  {scent.map(({ id, text }) => (
                     <li key={id}>
                       <Link to={`/product-list/scent/${id}`}>{text}</Link>
                     </li>
@@ -42,7 +67,7 @@ const Nav = () => {
               <div className="main">
                 <p>Brand</p>
                 <ul className="mega_lists">
-                  {BRAND_CATEGORY_LIST.map(({ id, text }) => (
+                  {brand.map(({ id, text }) => (
                     <li key={id}>
                       <Link to={`/product-list/brand/${id}`}>{text}</Link>
                     </li>
@@ -53,10 +78,10 @@ const Nav = () => {
                 <p>구독 서비스</p>
                 <ul className="mega_lists">
                   <li>
-                    <a>구독 안내</a>
+                    <Link to={`/info`}>구독 안내</Link>
                   </li>
                   <li>
-                    <a>구독 신청</a>
+                    <Link to={`/pay`}>구독 신청</Link>
                   </li>
                 </ul>
               </div>
@@ -67,11 +92,22 @@ const Nav = () => {
           </div>
         </ul>
         <div className="logo">
-          <img alt="logoimg" src="/images/logo.png" />
+          <img
+            alt="logoimg"
+            src="/images/logo.png"
+            onClick={() => navigate('/main')}
+          />
         </div>
+
         <ul className="header_links">
           {isLoggedIn ? (
             <>
+              <li>
+                <p>한적한 하루의 고양이 님</p>
+              </li>
+              <li>
+                <p>100,000 포인트</p>
+              </li>
               <li>
                 <p className="btn" onClick={handleLogout}>
                   로그아웃
@@ -85,6 +121,7 @@ const Nav = () => {
             </>
           ) : (
             <>
+              <li></li>
               <li>
                 <Link to="/signup">회원 가입</Link>
               </li>
@@ -106,6 +143,7 @@ const SCENT_CATEGORY_LIST = [
   { id: 2, text: 'Woody' },
   { id: 3, text: 'Floral' },
   { id: 4, text: 'Musk' },
+  { id: 5, text: 'Spicy' },
 ];
 
 const BRAND_CATEGORY_LIST = [
@@ -113,6 +151,7 @@ const BRAND_CATEGORY_LIST = [
   { id: 2, text: 'Tom Ford' },
   { id: 3, text: 'Byredo' },
   { id: 4, text: 'Diptyque' },
+  { id: 5, text: 'Atelier Cologne' },
 ];
 
 const CATEGORY_LIST = [

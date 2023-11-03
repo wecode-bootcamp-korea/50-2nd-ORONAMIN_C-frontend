@@ -12,7 +12,8 @@
   .wrapper {
     position: relative;
     padding: 0 10px;
-    margin-right: 150px;
+    margin-right: px;
+    margin-left: px;
     height: 75px;
     display: flex;
     justify-content: space-between;
@@ -95,3 +96,10 @@
     padding-bottom: 20px;
   }
 }
+
+// .leftheader {
+//   display: flex;
+//   text-align: left;
+//   position: absolute;
+//   left: 10pxs;
+// }
